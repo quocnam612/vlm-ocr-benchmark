@@ -1,0 +1,2 @@
+category,n,mean_cer,mean_wer,mean_token_precision,mean_token_recall,mean_token_f1,mean_latency_sec,truncated
+text,5790,0.5706379179583434,0.7778349183676755,0.536674064295209,0.31265772701440314,0.38374624639410654,5.697611548804097,1038

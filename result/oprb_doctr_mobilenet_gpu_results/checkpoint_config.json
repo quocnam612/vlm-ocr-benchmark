@@ -1,0 +1,100 @@
+{
+  "dataset": "kpurkayastha/OPRB",
+  "split": "test",
+  "model": "docTR:db_mobilenet_v3_large+crnn_mobilenet_v3_small",
+  "detector": "db_mobilenet_v3_large",
+  "recognizer": "crnn_mobilenet_v3_small",
+  "components": [
+    {
+      "component": "detector",
+      "architecture": "db_mobilenet_v3_large",
+      "checkpoint_filename": "db_mobilenet_v3_large-21748dd0.pt",
+      "checkpoint_url": "https://doctr-static.mindee.com/models?id=v0.8.1/db_mobilenet_v3_large-21748dd0.pt&src=0",
+      "sha256": "21748dd02c0e40475d9ea53e72817c4f08ba90adea5231d0dc2c1a65d7d6b4e1",
+      "weight_file_bytes": 16991778,
+      "parameter_count": 4183858,
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "input_shape_chw": [
+        3,
+        1024,
+        1024
+      ],
+      "normalization_mean": [
+        0.798,
+        0.785,
+        0.772
+      ],
+      "normalization_std": [
+        0.264,
+        0.2749,
+        0.287
+      ],
+      "vocab": null
+    },
+    {
+      "component": "recognizer",
+      "architecture": "crnn_mobilenet_v3_small",
+      "checkpoint_filename": "crnn_mobilenet_v3_small_pt-3b919a02.pt",
+      "checkpoint_url": "https://doctr-static.mindee.com/models?id=v0.3.1/crnn_mobilenet_v3_small_pt-3b919a02.pt&src=0",
+      "sha256": "3b919a024482e79893bdc3819a1a5ae7003249f7b73fe0ea36ba9cebed02024b",
+      "weight_file_bytes": 8420979,
+      "parameter_count": 2077855,
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "input_shape_chw": [
+        3,
+        32,
+        128
+      ],
+      "normalization_mean": [
+        0.694,
+        0.695,
+        0.693
+      ],
+      "normalization_std": [
+        0.299,
+        0.296,
+        0.301
+      ],
+      "vocab": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\u00b0\u00a3\u20ac\u00a5\u00a2\u0e3f\u00e0\u00e2\u00e9\u00e8\u00ea\u00eb\u00ee\u00ef\u00f4\u00f9\u00fb\u00fc\u00e7\u00c0\u00c2\u00c9\u00c8\u00ca\u00cb\u00ce\u00cf\u00d4\u00d9\u00db\u00dc\u00c7"
+    }
+  ],
+  "quantization": null,
+  "dtype_requested": "float32",
+  "ocr_settings": {
+    "assume_straight_pages": true,
+    "preserve_aspect_ratio": true,
+    "symmetric_pad": true,
+    "export_as_straight_boxes": false,
+    "detect_orientation": false,
+    "straighten_pages": false,
+    "detect_language": false,
+    "disable_page_orientation": true,
+    "disable_crop_orientation": true,
+    "det_bs": 1,
+    "reco_bs": 128,
+    "pretrained": true,
+    "pretrained_backbone": false,
+    "detector_bin_threshold": 0.3,
+    "detector_box_threshold": 0.1,
+    "document_builder_defaults": {
+      "resolve_lines": true,
+      "resolve_blocks": false,
+      "paragraph_break": 0.035,
+      "export_as_straight_boxes": false
+    },
+    "recognition_decoding": "CTC best-path; native docTR postprocessor"
+  },
+  "reading_order": "docTR page/block/line/word order; join nonempty word values with spaces",
+  "normalize_case": true,
+  "metric_definition": "Macro means of per-image CER/WER and bag-of-words overlap",
+  "device": "cuda:0",
+  "device_name": "Tesla T4",
+  "torch_num_threads": 2,
+  "doctr_version": "0.11.0",
+  "torch_version": "2.11.0+cu130",
+  "torchvision_version": "0.26.0+cu130"
+}

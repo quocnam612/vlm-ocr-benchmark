@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-20",
+  "source_directory": "result/",
+  "csv_reader": "pandas engine=python, preserve embedded NUL characters",
+  "metric_policy": "NFKC, casefold, collapsed whitespace; remove exact layout tokens in GT and prediction",
+  "excluded_layout_tokens": [
+    "##ltfigure##",
+    "##ltline##"
+  ],
+  "metric_aggregation": "Unweighted arithmetic mean of per-image rates",
+  "verified_success_records": 41788,
+  "invalid_reference_count": 1,
+  "common_all_models_count": 5790,
+  "common_ocr_count": 8999,
+  "gt_layout_marker_count": 1269186,
+  "unspecified_density_count": 2852,
+  "coverage": [
+    {
+      "model": "M1",
+      "name": "Florence",
+      "selected": 9000,
+      "attempted": 5792,
+      "status_ok": 5790,
+      "scorable": 5790,
+      "errors": 2,
+      "unattempted": 3208,
+      "empty_predictions": 0,
+      "truncated": 1038,
+      "text_scorable": 5790,
+      "nontext_scorable": 0
+    },
+    {
+      "model": "M2",
+      "name": "EasyOCR",
+      "selected": 9000,
+      "attempted": 9000,
+      "status_ok": 9000,
+      "scorable": 8999,
+      "errors": 0,
+      "unattempted": 0,
+      "empty_predictions": 8,
+      "truncated": 0,
+      "text_scorable": 6000,
+      "nontext_scorable": 2999
+    },
+    {
+      "model": "M3",
+      "name": "docTR",
+      "selected": 9000,
+      "attempted": 9000,
+      "status_ok": 9000,
+      "scorable": 8999,
+      "errors": 0,
+      "unattempted": 0,
+      "empty_predictions": 5,
+      "truncated": 0,
+      "text_scorable": 6000,
+      "nontext_scorable": 2999
+    },
+    {
+      "model": "M4",
+      "name": "PaddleOCR",
+      "selected": 9000,
+      "attempted": 9000,
+      "status_ok": 8999,
+      "scorable": 8999,
+      "errors": 1,
+      "unattempted": 0,
+      "empty_predictions": 5,
+      "truncated": 0,
+      "text_scorable": 6000,
+      "nontext_scorable": 2999
+    },
+    {
+      "model": "M5",
+      "name": "Tesseract",
+      "selected": 9000,
+      "attempted": 9000,
+      "status_ok": 8999,
+      "scorable": 8999,
+      "errors": 1,
+      "unattempted": 0,
+      "empty_predictions": 45,
+      "truncated": 0,
+      "text_scorable": 6000,
+      "nontext_scorable": 2999
+    }
+  ],
+  "rate_outliers": [
+    {
+      "model": "M1",
+      "max_cer": 2.3,
+      "n_cer_gt_one": 51,
+      "max_wer": 3.9133858267716537,
+      "n_wer_gt_one": 122
+    },
+    {
+      "model": "M2",
+      "max_cer": 69.0,
+      "n_cer_gt_one": 27,
+      "max_wer": 29.0,
+      "n_wer_gt_one": 70
+    },
+    {
+      "model": "M3",
+      "max_cer": 135.5,
+      "n_cer_gt_one": 56,
+      "max_wer": 79.0,
+      "n_wer_gt_one": 114
+    },
+    {
+      "model": "M4",
+      "max_cer": 510.0,
+      "n_cer_gt_one": 48,
+      "max_wer": 221.0,
+      "n_wer_gt_one": 71
+    },
+    {
+      "model": "M5",
+      "max_cer": 83.5,
+      "n_cer_gt_one": 15,
+      "max_wer": 32.0,
+      "n_wer_gt_one": 23
+    }
+  ],
+  "inputs": [
+    {
+      "path": "result/oprb_florence_standard_results/per_image_results.csv",
+      "sha256": "8c87fadc34a9fb37ca92eca5e92133cecc495f41c76fb8ad5878aa536f14a5ac"
+    },
+    {
+      "path": "result/oprb_florence_standard_results/run_config.json",
+      "sha256": "15e723fc2f40c0b06268ddc4344c650904c964f78873840230b60e5e046fd49a"
+    },
+    {
+      "path": "result/oprb_florence_standard_results/checkpoint_config.json",
+      "sha256": "af26c3966ef7636fcfef2649855da568441e4353cfd52efc9363fab6eee360ec"
+    },
+    {
+      "path": "result/oprb_easyocr_en_gpu_results/per_image_results.csv",
+      "sha256": "19bd92dc77a3f1ac8b3fa7301710cd9fe199b6cc5ebbc65731a0c1c9fcf8ffd2"
+    },
+    {
+      "path": "result/oprb_easyocr_en_gpu_results/run_config.json",
+      "sha256": "d2d6d45dbb608a5ffda112b9fe2830d2a132ec917dd1a487c3d62b26002827ea"
+    },
+    {
+      "path": "result/oprb_easyocr_en_gpu_results/checkpoint_config.json",
+      "sha256": "7bccf45410908875e1d90ada981382fac2f1a6902156483173d7b18dae0db2c6"
+    },
+    {
+      "path": "result/oprb_doctr_mobilenet_gpu_results/per_image_results.csv",
+      "sha256": "a6a97c95ac570c87bf81c2d0c1b175126c7307d55d60dc1b5e6d3cee5a4845f0"
+    },
+    {
+      "path": "result/oprb_doctr_mobilenet_gpu_results/run_config.json",
+      "sha256": "c3029085c39bddc16972f8bcf56f6850fbe0ef9c570896334107a74e205d75b7"
+    },
+    {
+      "path": "result/oprb_doctr_mobilenet_gpu_results/checkpoint_config.json",
+      "sha256": "70edbc71123309805eeba47d268a66fec13364fefb6a0c07f47840abd248e094"
+    },
+    {
+      "path": "result/oprb_paddleocr_v5_en_gpu_results/per_image_results.csv",
+      "sha256": "5ea62b630029118757e8cd042020a02d92085383cba8dddef60d21b171eb394e"
+    },
+    {
+      "path": "result/oprb_paddleocr_v5_en_gpu_results/run_config.json",
+      "sha256": "6fa2e4cc50daaa2f57decbfc107d3ffadcadf17889555e490bcef9f0697daceb"
+    },
+    {
+      "path": "result/oprb_paddleocr_v5_en_gpu_results/checkpoint_config.json",
+      "sha256": "333ba045459022bf4e97c42e193cd2f2023422f9ddb9e2329766bdd991753494"
+    },
+    {
+      "path": "result/oprb_tesseract_eng_fast_cpu_results/per_image_results.csv",
+      "sha256": "7164a61c48e7bdf9013f61747554d77e9804830a62933aff89f76bbe184aba06"
+    },
+    {
+      "path": "result/oprb_tesseract_eng_fast_cpu_results/run_config.json",
+      "sha256": "a337c434892befddcec9ecf90abf05a044cad42d4320009cc59ebde69c9c7bbb"
+    },
+    {
+      "path": "result/oprb_tesseract_eng_fast_cpu_results/checkpoint_config.json",
+      "sha256": "9dd02b6ecc710af0bd3f2578e25c226233906f05940fa0705c8623edc254d915"
+    }
+  ]
+}

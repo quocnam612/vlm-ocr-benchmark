@@ -1,0 +1,6 @@
+model,name,selected,attempted,status_ok,scorable,errors,unattempted,empty_predictions,truncated,text_scorable,nontext_scorable
+M1,Florence,9000,5792,5790,5790,2,3208,0,1038,5790,0
+M2,EasyOCR,9000,9000,9000,8999,0,0,8,0,6000,2999
+M3,docTR,9000,9000,9000,8999,0,0,5,0,6000,2999
+M4,PaddleOCR,9000,9000,8999,8999,1,0,5,0,6000,2999
+M5,Tesseract,9000,9000,8999,8999,1,0,45,0,6000,2999

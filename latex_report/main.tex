@@ -1,0 +1,56 @@
+% !TeX program = pdflatex
+\documentclass[12pt,a4paper]{article}
+
+% Dùng template HCMUS hiện có: giữ style, bìa, logo, header và footer.
+\usepackage{hcmus-report-template}
+\usepackage{tabularx,booktabs,array,titlesec}
+\setlength{\parindent}{0pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newcommand{\coursename}{Nhập môn xử lý ngôn ngữ tự nhiên}
+\newcommand{\reportname}{Đánh giá mô hình VLM và OCR nhẹ trên ảnh tài liệu bị che khuất}
+\newcommand{\reporttitle}{BÁO CÁO LAB 2}
+\newcommand{\studentname}{Nguyễn Quốc Nam - 24120098}
+\newcommand{\teachername}{PGS.TS. Đinh Điền\\TS. Nguyễn Hồng Bửu Long}
+\newcommand{\reportdate}{\today}
+
+\lhead{\small\reporttitle}
+\rhead{\small Trường Đại học Khoa học Tự nhiên - ĐHQG HCM\\\coursename}
+\newcommand{\leftfooter}{}
+\lfoot{\leftfooter}
+\hypersetup{pdftitle={Lab 2: Đánh giá VLM và OCR trên OPRB},
+            pdfauthor={Nguyễn Quốc Nam},hidelinks}
+
+\begin{document}
+\pagenumbering{arabic}
+\hypersetup{pageanchor=false}
+\begingroup
+\setstretch{1.25}
+\input{content/title}
+\endgroup
+\hypersetup{pageanchor=true}
+\setcounter{page}{2}
+
+% LabOCR.pdf yêu cầu dưới 4 trang A4: bìa + tối đa 2 trang nội dung.
+% Không thêm trang mục lục/thành viên riêng; tác giả đã có trên bìa.
+\setstretch{1.0}
+\fontsize{10.5}{11.8}\selectfont
+\setlength{\parskip}{2pt}
+\setlength{\emergencystretch}{1.5em}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\titleformat{\section}{\normalsize\bfseries}{\thesection.}{0.4em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.4em}{}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titlespacing*{\subsection}{0pt}{4pt}{1pt}
+
+\input{content/I-GioiThieu}
+\input{content/II-DuLieu}
+\input{content/III-MoHinh}
+\input{content/IV-ThucNghiem}
+\input{content/V-KetLuan}
+\input{ref/ref}
+
+% member.tex và phuluc.tex vẫn có sẵn dưới dạng tùy chọn của template,
+% không nhập vào bản PDF ngắn theo yêu cầu lab.
+\end{document}

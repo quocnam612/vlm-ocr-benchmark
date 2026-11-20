@@ -1,0 +1,109 @@
+{
+  "dataset": "kpurkayastha/OPRB",
+  "split": "test",
+  "model": "JaidedAI/EasyOCR:craft+english_g2",
+  "languages": [
+    "en"
+  ],
+  "detector": "craft",
+  "recognizer": "english_g2",
+  "components": [
+    {
+      "component": "detector",
+      "checkpoint_filename": "craft_mlt_25k.pth",
+      "checkpoint_url": "https://github.com/JaidedAI/EasyOCR/releases/download/pre-v1.1.6/craft_mlt_25k.zip",
+      "sha256": "4a5efbfb48b4081100544e75e1e2b57f8de3d84f213004b14b85fd4b3748db17",
+      "weight_file_bytes": 83152330,
+      "parameter_count": 20770466,
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "quantized_module_types": []
+    },
+    {
+      "component": "recognizer",
+      "checkpoint_filename": "english_g2.pth",
+      "checkpoint_url": "https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/english_g2.zip",
+      "sha256": "e2272681d9d67a04e2dff396b6e95077bc19001f8f6d3593c307b9852e1c29e8",
+      "weight_file_bytes": 15143997,
+      "parameter_count": 3781345,
+      "parameter_dtypes": [
+        "torch.float32"
+      ],
+      "quantized_module_types": []
+    }
+  ],
+  "dynamic_quantization_requested": false,
+  "readtext_settings": {
+    "decoder": "greedy",
+    "beamWidth": 5,
+    "batch_size": 16,
+    "workers": 0,
+    "allowlist": null,
+    "blocklist": null,
+    "detail": 1,
+    "rotation_info": null,
+    "paragraph": false,
+    "min_size": 20,
+    "contrast_ths": 0.1,
+    "adjust_contrast": 0.5,
+    "filter_ths": 0.003,
+    "text_threshold": 0.7,
+    "low_text": 0.4,
+    "link_threshold": 0.4,
+    "canvas_size": 2560,
+    "mag_ratio": 1.0,
+    "slope_ths": 0.1,
+    "ycenter_ths": 0.5,
+    "height_ths": 0.5,
+    "width_ths": 0.5,
+    "y_ths": 0.5,
+    "x_ths": 1.0,
+    "add_margin": 0.1,
+    "threshold": 0.2,
+    "bbox_min_score": 0.2,
+    "bbox_min_size": 3,
+    "max_candidates": 0,
+    "output_format": "standard"
+  },
+  "reading_order": "EasyOCR returned region order; join with spaces",
+  "normalize_case": true,
+  "metric_definition": "Macro means of per-image CER/WER and bag-of-words overlap",
+  "device": "cuda:0",
+  "device_name": "Tesla T4",
+  "torch_num_threads": 2,
+  "easyocr_version": "1.7.2",
+  "torch_version": "2.11.0+cu130",
+  "torchvision_version": "0.26.0+cu130",
+  "categories": [
+    "text",
+    "nontext"
+  ],
+  "no_finetuning": true,
+  "max_samples_per_category": null,
+  "random_seed": 42,
+  "max_eval_hours_per_run": 10.0,
+  "metrics": {
+    "mean_cer": 0.599298758666145,
+    "mean_wer": 0.8278489371970854,
+    "mean_token_precision": 0.4385469359136927,
+    "mean_token_recall": 0.3015471888265823,
+    "mean_token_f1": 0.35013303321998257,
+    "mean_latency_sec": 1.363274676001769,
+    "n_selected": 9000,
+    "n_success": 9000,
+    "n_errors": 0,
+    "n_remaining": 0,
+    "evaluation_complete": true,
+    "n_empty_predictions": 9,
+    "mean_text_regions": 169.522
+  },
+  "gpu_name": "Tesla T4",
+  "cuda_version": "13.0",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "jiwer_version": "4.0.0",
+  "pandas_version": "2.3.3",
+  "numpy_version": "2.1.3",
+  "output_token_limit": null,
+  "output_token_limit_note": "Not applicable to this detection + CTC recognition pipeline."
+}

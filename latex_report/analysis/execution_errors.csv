@@ -1,0 +1,5 @@
+model,name,category,sample_id,error
+M1,Florence,text,Sim__110.tar_1507.04377.gz_master_12_ori,"ValueError('mean must have 1 elements if it is an iterable, got 3')"
+M1,Florence,text,Sim__110.tar_1507.04377.gz_master_20_ori,"ValueError('mean must have 1 elements if it is an iterable, got 3')"
+M4,PaddleOCR,nontext,White_Burnt__0p5pct__101.tar_1605.09645.gz_main_compile2_3_ori,ValueError('GT chỉ chứa nhãn cấu trúc; không có văn bản để chấm điểm.')
+M5,Tesseract,nontext,White_Burnt__0p5pct__101.tar_1605.09645.gz_main_compile2_3_ori,ValueError('GT chỉ chứa nhãn cấu trúc; không có văn bản để chấm điểm.')

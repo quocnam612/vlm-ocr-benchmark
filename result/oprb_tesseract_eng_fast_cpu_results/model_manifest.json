@@ -1,0 +1,70 @@
+{
+  "components": [
+    {
+      "component": "english_LSTM_and_language_data",
+      "architecture": "Tesseract 5 English LSTM (tessdata_fast)",
+      "checkpoint_repo": "tesseract-ocr/tessdata_fast",
+      "checkpoint_revision": "87416418657359cb625c412a48b6e1d6d41c29bd",
+      "checkpoint_url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/eng.traineddata",
+      "checkpoint_filename": "eng.traineddata",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "weight_file_bytes": 4113088,
+      "parameter_count": null,
+      "parameter_count_note": "traineddata includes language dictionaries and network; do not infer count from file size.",
+      "pretrained_weight_format": "Integer LSTM weights from the official tessdata_fast repository"
+    }
+  ],
+  "native_runtime_artifacts": [
+    {
+      "filename": "tesserocr/tesserocr.cpython-313-x86_64-linux-gnu.so",
+      "sha256": "aed06889fda2b473215dcc51f9140958598c5d58314c16ff3d51452c5ade84bf"
+    },
+    {
+      "filename": "tesserocr.libs/libjbig-2504a0c3.so.2.1",
+      "sha256": "dc5b2c9abed0e2e4cfc12a90a7f12a4dffa09cf8c2e707dcf4b1431f3a04c4c2"
+    },
+    {
+      "filename": "tesserocr.libs/libjpeg-e87d2658.so.62.2.0",
+      "sha256": "b2105c7528877da01b8b1021b8235fe959b32d5d2332d9e5622c30d360be6c1b"
+    },
+    {
+      "filename": "tesserocr.libs/libleptonica-bc35498f.so.6.0.0",
+      "sha256": "d35c9ca82cb74b60189eeb6b9134cea012a8b1059fac475239ab98703cb90d99"
+    },
+    {
+      "filename": "tesserocr.libs/libpng16-ebd1fa42.so.16.34.0",
+      "sha256": "4373d8ae2a306f40a8aeac7e0a277dfc5c80212f70e3163d2d34ece42c55c59b"
+    },
+    {
+      "filename": "tesserocr.libs/libtesseract-9721d5b3.so.5.5.4",
+      "sha256": "f12894f66045e58d6119b99a6b9aed927867f9b339eca5ca0f8d3c1b409ffa77"
+    },
+    {
+      "filename": "tesserocr.libs/libtiff-76fbcf36.so.5.3.0",
+      "sha256": "4257914331ca33a0b708599958634d218fd2e462b2c23a53ffb5abbe15a28785"
+    },
+    {
+      "filename": "tesserocr.libs/libwebp-78a6964e.so.7.0.2",
+      "sha256": "5ac03c8038913ac9880cb74ad0acd5a64c03e5fb870c58420df734504b8fe7e6"
+    },
+    {
+      "filename": "tesserocr.libs/libwebpmux-489e612a.so.3.0.2",
+      "sha256": "8ceeaf50a5d0e80f3eb88e6408b80370a8a772df3eb8ca4a295708d287b58169"
+    }
+  ],
+  "engine_version_full": "tesseract 5.5.4\n leptonica-1.87.0\n  libjpeg 6b (libjpeg-turbo 1.5.3) : libpng 1.6.34 : libtiff 4.0.9 : zlib 1.2.11 : libwebp 1.0.0",
+  "ocr_settings": {
+    "oem": 1,
+    "psm": 3,
+    "language": "eng",
+    "source_dpi": 300,
+    "image_resizing": null,
+    "recognition_timeout_ms": 120000,
+    "openmp_thread_limit_requested": 2,
+    "classify_enable_learning": "0",
+    "tessedit_enable_doc_dict": "0",
+    "cross_page_state": "ClearAdaptiveClassifier before each page; Clear after each page",
+    "confidence_filter": null,
+    "initialization": "One PyTessBaseAPI per run; pretrained weights stay loaded"
+  }
+}

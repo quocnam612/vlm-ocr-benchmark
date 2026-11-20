@@ -1,0 +1,20 @@
+{
+  "repo_id": "kpurkayastha/OPRB",
+  "data_root": "/kaggle/working/oprb_test",
+  "model_dir": "/kaggle/working/tesseract_fast_models",
+  "output_dir": "/kaggle/working/oprb_tesseract_eng_fast_cpu_results",
+  "categories": [
+    "text",
+    "nontext"
+  ],
+  "max_samples_per_category": null,
+  "random_seed": 42,
+  "normalize_case": true,
+  "max_eval_hours": 10.0,
+  "cpu_threads": 2,
+  "page_segmentation_mode": 3,
+  "source_dpi": 300,
+  "ocr_timeout_ms": 120000,
+  "download_data": true,
+  "resume_from": null
+}

@@ -1,0 +1,13 @@
+% !TeX root = ../main.tex
+\begingroup\fontsize{9}{10.3}\selectfont
+\renewcommand{\refname}{Tài liệu tham khảo}
+\let\originalthebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \originalthebibliography{#1}%
+  \setlength{\itemsep}{0pt}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\parskip}{0pt}%
+}
+\bibliographystyle{unsrt}
+\bibliography{ref/ref}
+\endgroup

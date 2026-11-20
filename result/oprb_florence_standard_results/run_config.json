@@ -1,0 +1,74 @@
+{
+  "dataset": "kpurkayastha/OPRB",
+  "split": "test",
+  "model": "florence-community/Florence-2-base",
+  "model_revision": "00921df66db728a9ceb750f5eca43e5c203a2051",
+  "precision": "float16",
+  "prompt": "<OCR>",
+  "image_preprocessing": {
+    "_processor_class": "Florence2Processor",
+    "auto_map": {
+      "AutoProcessor": "processing_florence2.Florence2Processor"
+    },
+    "image_processor_type": "CLIPImageProcessor",
+    "image_seq_length": 577,
+    "do_resize": true,
+    "size": {
+      "height": 768,
+      "width": 768
+    },
+    "resample": 3,
+    "do_center_crop": false,
+    "crop_size": {
+      "height": 768,
+      "width": 768
+    },
+    "do_rescale": true,
+    "rescale_factor": 0.00392156862745098,
+    "do_normalize": true,
+    "image_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "image_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "do_convert_rgb": null
+  },
+  "max_new_tokens": 1024,
+  "num_beams": 3,
+  "do_sample": false,
+  "no_repeat_ngram_size": 3,
+  "early_stopping": true,
+  "normalize_case": true,
+  "metric_definition": "Macro means of per-image CER/WER and bag-of-words overlap",
+  "transformers_version": "4.57.6",
+  "torch_version": "2.11.0+cu130",
+  "categories": [
+    "text",
+    "nontext"
+  ],
+  "no_finetuning": true,
+  "max_samples_per_category": null,
+  "random_seed": 42,
+  "max_eval_hours_per_run": 10.0,
+  "metrics": {
+    "mean_cer": 0.5706379179583434,
+    "mean_wer": 0.7778349183676755,
+    "mean_token_precision": 0.536674064295209,
+    "mean_token_recall": 0.31265772701440314,
+    "mean_token_f1": 0.38374624639410654,
+    "mean_latency_sec": 5.697611548804097,
+    "n_selected": 9000,
+    "n_success": 5790,
+    "n_remaining": 3210,
+    "evaluation_complete": false,
+    "n_errors": 2,
+    "n_possibly_truncated": 1038
+  },
+  "gpu_name": "Tesla T4",
+  "jiwer_version": "4.0.0"
+}

@@ -1,0 +1,73 @@
+% !TeX root = ../main.tex
+\section{Kết quả thực nghiệm (Experimental Results)}
+\subsection{Quy tắc chấm và so sánh năm mô hình}
+Chấm lại GT và dự đoán đã lưu: Unicode NFKC, casefold, gộp khoảng trắng, bỏ đúng
+hai token cấu trúc \texttt{\#\#LTLine\#\#}, \texttt{\#\#LTFigure\#\#} ở cả hai phía.
+Mọi bảng dưới đây dùng cùng chính sách, nên khác bảng gốc chưa lọc marker.
+Điểm là trung bình đều theo ảnh (macro), không cắt CER/WER tại 100\%.
+\[
+ \mathrm{CER}=\frac{S_c+D_c+I_c}{N_c},\quad
+ \mathrm{WER}=\frac{S_w+D_w+I_w}{N_w},\quad
+ P=\frac{m}{N_{\rm pred}},\quad R=\frac{m}{N_{\rm GT}},\quad F_1=\frac{2PR}{P+R}.
+\]
+$S,D,I$: thay thế, xóa, chèn; $N$: độ dài GT;
+$m=\sum_t\min(c_{\rm GT}(t),c_{\rm pred}(t))$ là giao đa tập token, không xét
+thứ tự. Dự đoán rỗng có $P=R=F_1=0$.
+Thời gian gồm đọc ảnh, tiền xử lý, suy luận, giải mã sau warm-up;
+không gồm tải dữ liệu/mô hình, chấm điểm, ghi checkpoint.
+
+\textbf{Tập chung năm mô hình: 5.790 ảnh text} đã có kết quả thành công ở cả năm.
+Các tỷ lệ dùng \%, $t$ dùng giây/ảnh; M5 dùng CPU, M1--M4 dùng GPU.
+
+\begingroup\fontsize{9.3}{10.5}\selectfont
+\setlength{\tabcolsep}{5pt}
+\input{analysis/generated/common_text_table}
+\par
+\endgroup
+PaddleOCR cao hơn docTR 5,61 điểm F1 và nhanh gấp 1,53 lần trên tập chung.
+Florence có 1.038/5.790 đầu ra bị gắn cờ có thể cắt tại 1.024 token (17,93\%);
+recall 31,63\% cho thấy nhiều từ GT chưa được tái tạo trong cấu hình này.
+
+\clearpage
+\subsection{Bốn OCR trên toàn bộ ảnh có GT hợp lệ}
+\begingroup\fontsize{9}{10.3}\selectfont
+\setlength{\tabcolsep}{3pt}
+\input{analysis/generated/full_ocr_table}
+\par
+\endgroup
+PaddleOCR dẫn đầu hai nhóm theo CER/WER/F1; F1 tổng 77,75\%, hơn docTR 4,99 điểm.
+M4/M3 có F1 nontext cao hơn text nhưng WER lớn hơn: F1 bỏ qua thứ tự từ,
+WER tính cả thứ tự/chèn. Hai nhóm khác trang, chưa thể quy chênh lệch cho vị trí
+che. Florence chưa có kết quả nontext.
+
+\subsection{Độ bền vững và giới hạn nhãn}
+\noindent\includegraphics[width=\linewidth]{img/robustness.pdf}
+{\footnotesize Hình: bốn OCR, cùng 8.999 ảnh; dưới mỗi loại là số ảnh.
+Ink/Dust/Stamp/Burnt/Whitener tương ứng các nhãn ở Mục 2.
+Biểu đồ mật độ dùng 6.147 ảnh có nhãn 0,5\%/1\%/2\%; 2.852 ảnh còn lại vẫn được tính ở bảng tổng.\par}
+PaddleOCR có F1 cao nhất ở cả sáu loại và ba mật độ. Through\_Stamp có F1 thấp
+nhất với cả bốn OCR (M4: 74,58\% so với Black\_Ink: 78,52\%). Từ 0,5\% lên 2\%,
+F1 M4 giảm 79,05\% xuống 76,99\%; M3 giảm 74,24\% xuống 71,49\%.
+Đây là mô tả các nhóm trang khác nhau, chưa phải thí nghiệm ghép cặp theo mật độ.
+GT ngắn hoặc thiếu chữ trong hình làm macro-CER nhạy với ngoại lệ (E3);
+không nên diễn giải CER nontext cao hơn như bằng chứng mọi ảnh nontext khó hơn.
+
+\subsection{Ví dụ định tính từ dự đoán đã lưu}
+{\fontsize{9.2}{10.5}\selectfont
+\textbf{E1 -- M4, Black\_Ink 1\%, mã \texttt{1601.04736/36}:}
+GT và dự đoán đều có ``Simulation Results for Parameters in FitzHugh-Nagamu Model'';
+CER/WER cả trang bằng 0\%: đọc đúng cả đoạn chữ và bảng số sau chuẩn hóa.\par
+\textbf{E2 -- M5, Through\_Dust 1\%, mã \texttt{1507.03120/23}:}
+GT ``Mod.'' và ``24'' thành ``Mod,'' và ``os''; CER 1,63\%, WER 6,90\%.
+Sai dấu câu và nhầm chữ--số; chưa đủ bằng chứng quy riêng cho vùng che.\par
+\textbf{E3 -- M4, nontext White\_Burnt 2\%, mã \texttt{1606.00144/28}:}
+GT còn ``29'' sau lọc marker, dự đoán có 222 từ, CER = 51.000\%.
+GT chỉ có số trang và marker hình nên phần dự đoán thêm bị tính là chèn;
+đây cũng là giới hạn nhãn. ID đầy đủ và cặp GT/dự đoán nằm trong
+\texttt{analysis/qualitative\_examples.json}.\par}
+
+\subsection{Hiệu quả tính toán}
+Trên 8.999 ảnh, M2/M3/M4/M5 lần lượt mất 1,363/0,601/0,403/0,906 giây/ảnh.
+M4 có tệp trọng số nhỏ hơn M3 khoảng 2,04 lần, F1 cao hơn và nhanh gấp 1,49 lần
+trên T4. M5 nhỏ nhất và chạy được CPU nhưng F1 chỉ 47,84\%; thời gian CPU/GPU
+không phải phép đo trên cùng phần cứng. Kích thước tệp không đại diện cho VRAM.

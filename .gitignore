@@ -1,0 +1,53 @@
+# Local agent configuration and credentials
+.agents/
+.aws/
+.codex/
+.env
+.env.*
+!.env.example
+*credentials*.json
+kaggle.json
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Dataset images, downloaded weights and temporary exports
+oprb_test/
+/oprb_*_results/
+*.tar
+*.tar.gz
+*.zip
+*.pt
+*.pth
+*.safetensors
+*.traineddata
+*.tmp
+
+# Full prediction CSVs are tracked as lossless .csv.gz archives.
+result/*/per_image_results.csv
+
+# Smoke tests and discontinued model, retained locally.
+/test/
+/OPRB_Qwen2_5_VL_3B_Test_Evaluation.ipynb
+
+# Unused material from the original LaTeX assignment template.
+/latex_report/code/
+/latex_report/content/member.tex
+/latex_report/content/phuluc.tex
+
+# LaTeX build files; keep the compiled report and vector figures.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot

@@ -1,0 +1,38 @@
+[
+  {
+    "example": "E1",
+    "model": "M4",
+    "category": "text",
+    "sample_id": "Black_Ink__1p0pct__10.tar_1601.04736.gz_BiasCorrectedLeastSquares_arxiv2016b_36_ori",
+    "source": "result/oprb_paddleocr_v5_en_gpu_results/per_image_results.csv",
+    "ground_truth": "Table 4: Simulation Results for Parameters in FitzHugh-Nagamu Model using Nonlinear Least- squares (NLS) with various starting values a=0.34 b=0.20 a =0.58 b=0.58 Starting Values Mean Mean percent Mean Mean percent a b (s.e.) (s.e.) conv. (s.e.) (s.e.) conv. 0.40 0.40 0.340 0.200 93.9% 1.154 2.018 31.7% (0.002) (0.015) (0.011) (0.032) 0.80 0.340 0.200 94.4% 0.580 0.581 94.7% (0.002) (0.015) (0.007) (0.010) 0.80 0.40 1.720 2.771 32.6 % 1.155 2.018 28.5% (0.012) (0.043) (0.010) (0.031) 0.80 1.720 2.770 33.7% 1.154 2.017 32.1% (0.013) (0.043) (0.011) (0.031) 1.2 0.40 1.720 2.770 36.2% 1.155 2.018 31.1% (0.012) (0.044) (0.011) (0.031) 0.80 1.720 2.772 36.2% 1.155 2.016 30.2% (0.013) (0.043) (0.011) (0.030) From BCLS 0.340 0.200 94.2% 0.580 0.581 95.1% (0.002) (0.015) (0.007) (0.010) 37 ##LTLine## ##LTLine## ##LTLine## ##LTLine## ##LTLine## ##LTLine## ##LTLine## ##LTLine##",
+    "prediction": "Table 4: Simulation Results for Parameters in FitzHugh-Nagamu Model using Nonlinear Least- squares (NLS) with various starting values a=0.34 b=0.20 a =0.58 b=0.58 Starting Values Mean Mean percent Mean Mean percent a b (s.e.) (s.e.) conv. (s.e.) (s.e.) conv. 0.40 0.40 0.340 0.200 93.9% 1.154 2.018 31.7% (0.002) (0.015) (0.011) (0.032) 0.80 0.340 0.200 94.4% 0.580 0.581 94.7% (0.002) (0.015) (0.007) (0.010) 0.80 0.40 1.720 2.771 32.6 % 1.155 2.018 28.5% (0.012) (0.043) (0.010) (0.031) 0.80 1.720 2.770 33.7% 1.154 2.017 32.1% (0.013) (0.043) (0.011) (0.031) 1.2 0.40 1.720 2.770 36.2% 1.155 2.018 31.1% (0.012) (0.044) (0.011) (0.031) 0.80 1.720 2.772 36.2% 1.155 2.016 30.2% (0.013) (0.043) (0.011) (0.030) From BCLS 0.340 0.200 94.2% 0.580 0.581 95.1% (0.002) (0.015) (0.007) (0.010) 37",
+    "cer": 0.0,
+    "wer": 0.0,
+    "f1": 1.0
+  },
+  {
+    "example": "E2",
+    "model": "M5",
+    "category": "text",
+    "sample_id": "Through_Dust__1p0pct__107.tar_1507.03120.gz_arxiv_23_ori",
+    "source": "result/oprb_tesseract_eng_fast_cpu_results/per_image_results.csv",
+    "ground_truth": "[42] Cordourier-Maruri, G., Gupta, V., and de Coss, R.: Recurrence in resonant trans- mission of the one-dimensional array of delta potetials, Mod. Phys. Lett. B, 28, 1450016 (2014) 24",
+    "prediction": "[42] Cordourier-Maruri, G., Gupta, V., and de Coss, R.: Recurrence in resonant trans-\n\nmission of the one-dimensional array of delta potetials, Mod, Phys. Lett. B, 28,\n\n1450016 (2014) os\n\n",
+    "cer": 0.0163043478260869,
+    "wer": 0.0689655172413793,
+    "f1": 0.9310344827586208
+  },
+  {
+    "example": "E3",
+    "model": "M4",
+    "category": "nontext",
+    "sample_id": "White_Burnt__2p0pct__102.tar_1606.00144.gz_math_model_arxiv_28_ori",
+    "source": "result/oprb_paddleocr_v5_en_gpu_results/per_image_results.csv",
+    "ground_truth": "29 ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure##",
+    "prediction": "Them, cinhaton of E% 5. uing the di a saatix sotation f Bip 14 alws cthat the Roci, T he wlictin of cwo (14 oven the ub ziats ahre deliang the defication -P -C( . (4- -A^ C CP 1 thembans $$- = D the alonpe aof Jal is wigwcal - y all she piew togeshar we laare Eig. 14 decand producta/quotientx, Dh Them, derlntions of Eq. 4, - matricen, wlheto the first ce is dinpo By. I slows that the Jacoban w., and the wcnd depend on lelp m bewen the intermediate livene 7 in relfructiew, Lin it rodacew the sleg RTUF3-L LURAD-SUTR YERO NC0 . 3O EE suiakir dutbaet iheoe sds Ma 2124 Chw T0s 2. 9. 1anc4. 5. Foepy Fabce Crip(a) Dy)  0. a R. a CAT()= CA()-C wh . C HOLD ON! CA-CA #. Iestaimio 1. 94207 N THERE IS MATLAB CODE TO DUWNLOAD whas $A^=}$ 5 hul  B 4LL, 8 8. V. Ce. Jq. 23 MATLAB shb shao-bvidest wlie wi aatie sn - 10 1CP 121 5- metLayrteie Brd, a repe suaplat c ws Fl) $5 whase. Frwd 8se (eos and Jatan/91es 2 - D L R o T1 we Jacul Hedien 0 2  lowp/ighp n -e   1 2 4 lomlt secaptione fale D J -k w2 La sal4 a 4. Mh, 14. M MV 14 29",
+    "cer": 510.0,
+    "wer": 221.0,
+    "f1": 0.0089686098654708
+  }
+]

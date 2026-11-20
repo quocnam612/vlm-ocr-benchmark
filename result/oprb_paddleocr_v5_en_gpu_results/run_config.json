@@ -1,0 +1,845 @@
+{
+  "dataset": "kpurkayastha/OPRB",
+  "split": "test",
+  "runtime_isolation": "venv_without_system_site_packages",
+  "python_version": "3.13.16",
+  "model": "PaddleOCR:PP-OCRv5_mobile_det+en_PP-OCRv5_mobile_rec",
+  "detector": "PP-OCRv5_mobile_det",
+  "recognizer": "en_PP-OCRv5_mobile_rec",
+  "components": [
+    {
+      "component": "detector",
+      "architecture": "PP-OCRv5_mobile_det",
+      "checkpoint_repo": "PaddlePaddle/PP-OCRv5_mobile_det",
+      "checkpoint_revision": "0d63e78e2b680928f6b1747d76a08db6e645efb7",
+      "artifacts": [
+        {
+          "filename": "inference.json",
+          "sha256": "05feef1acb00aa4cd7362b15f7f501fc4f99d7b1fa73c1c871e0c7b1504b0f5c",
+          "bytes": 229777
+        },
+        {
+          "filename": "inference.pdiparams",
+          "sha256": "afa1820cb16c1fd0dad589d0f8b389139061c1ef6d68019685fd07be997dda5b",
+          "bytes": 4692937
+        },
+        {
+          "filename": "inference.yml",
+          "sha256": "98069072e1b6b37d727fd9d9f11725faa46d6ea0de012f2ed26caea011c37699",
+          "bytes": 903
+        }
+      ],
+      "weight_file_bytes": 4692937,
+      "parameter_count": null,
+      "parameter_count_note": "Not inferred from serialized inference-file size; report weight MiB.",
+      "inference_config": {
+        "Global": {
+          "model_name": "PP-OCRv5_mobile_det"
+        },
+        "Hpi": {
+          "backend_configs": {
+            "paddle_infer": {
+              "trt_dynamic_shapes": {
+                "x": [
+                  [
+                    1,
+                    3,
+                    32,
+                    32
+                  ],
+                  [
+                    1,
+                    3,
+                    736,
+                    736
+                  ],
+                  [
+                    1,
+                    3,
+                    4000,
+                    4000
+                  ]
+                ]
+              }
+            },
+            "tensorrt": {
+              "dynamic_shapes": {
+                "x": [
+                  [
+                    1,
+                    3,
+                    32,
+                    32
+                  ],
+                  [
+                    1,
+                    3,
+                    736,
+                    736
+                  ],
+                  [
+                    1,
+                    3,
+                    4000,
+                    4000
+                  ]
+                ]
+              }
+            }
+          }
+        },
+        "PreProcess": {
+          "transform_ops": [
+            {
+              "DecodeImage": {
+                "channel_first": false,
+                "img_mode": "BGR"
+              }
+            },
+            {
+              "DetLabelEncode": null
+            },
+            {
+              "DetResizeForTest": {
+                "resize_long": 960
+              }
+            },
+            {
+              "NormalizeImage": {
+                "mean": [
+                  0.485,
+                  0.456,
+                  0.406
+                ],
+                "order": "hwc",
+                "scale": "1./255.",
+                "std": [
+                  0.229,
+                  0.224,
+                  0.225
+                ]
+              }
+            },
+            {
+              "ToCHWImage": null
+            },
+            {
+              "KeepKeys": {
+                "keep_keys": [
+                  "image",
+                  "shape",
+                  "polys",
+                  "ignore_tags"
+                ]
+              }
+            }
+          ]
+        },
+        "PostProcess": {
+          "name": "DBPostProcess",
+          "thresh": 0.3,
+          "box_thresh": 0.6,
+          "max_candidates": 1000,
+          "unclip_ratio": 1.5
+        }
+      }
+    },
+    {
+      "component": "recognizer",
+      "architecture": "en_PP-OCRv5_mobile_rec",
+      "checkpoint_repo": "PaddlePaddle/en_PP-OCRv5_mobile_rec",
+      "checkpoint_revision": "267c36e24c331595590fe7bd72bde2436fd286f2",
+      "artifacts": [
+        {
+          "filename": "inference.json",
+          "sha256": "fd1b6ec722ea841a72d3ba43e527df1d1066d5d7808e0503ee3eec7265188753",
+          "bytes": 217712
+        },
+        {
+          "filename": "inference.pdiparams",
+          "sha256": "3ec8a97ed6cefe8568d3e2ee90bb193299b566a7661aa4fd52d224b96b59f66b",
+          "bytes": 7772315
+        },
+        {
+          "filename": "inference.yml",
+          "sha256": "27e91d0582f40168aa218303c76e184bc78fa7a5d105aad0cfbad8458b441067",
+          "bytes": 3964
+        }
+      ],
+      "weight_file_bytes": 7772315,
+      "parameter_count": null,
+      "parameter_count_note": "Not inferred from serialized inference-file size; report weight MiB.",
+      "inference_config": {
+        "Global": {
+          "model_name": "en_PP-OCRv5_mobile_rec"
+        },
+        "Hpi": {
+          "backend_configs": {
+            "paddle_infer": {
+              "trt_dynamic_shapes": {
+                "x": [
+                  [
+                    1,
+                    3,
+                    48,
+                    160
+                  ],
+                  [
+                    1,
+                    3,
+                    48,
+                    320
+                  ],
+                  [
+                    8,
+                    3,
+                    48,
+                    3200
+                  ]
+                ]
+              }
+            },
+            "tensorrt": {
+              "dynamic_shapes": {
+                "x": [
+                  [
+                    1,
+                    3,
+                    48,
+                    160
+                  ],
+                  [
+                    1,
+                    3,
+                    48,
+                    320
+                  ],
+                  [
+                    8,
+                    3,
+                    48,
+                    3200
+                  ]
+                ]
+              }
+            }
+          }
+        },
+        "PreProcess": {
+          "transform_ops": [
+            {
+              "DecodeImage": {
+                "channel_first": false,
+                "img_mode": "BGR"
+              }
+            },
+            {
+              "MultiLabelEncode": {
+                "gtc_encode": "NRTRLabelEncode"
+              }
+            },
+            {
+              "RecResizeImg": {
+                "image_shape": [
+                  3,
+                  48,
+                  320
+                ]
+              }
+            },
+            {
+              "KeepKeys": {
+                "keep_keys": [
+                  "image",
+                  "label_ctc",
+                  "label_gtc",
+                  "length",
+                  "valid_ratio"
+                ]
+              }
+            }
+          ]
+        },
+        "PostProcess": {
+          "name": "CTCLabelDecode",
+          "character_dict": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+            "!",
+            "\"",
+            "#",
+            "$",
+            "%",
+            "&",
+            "'",
+            "(",
+            ")",
+            "*",
+            "+",
+            ",",
+            "-",
+            ".",
+            "/",
+            ":",
+            ";",
+            "<",
+            "=",
+            ">",
+            "?",
+            "@",
+            "[",
+            "\\",
+            "]",
+            "_",
+            "`",
+            "{",
+            "|",
+            "}",
+            "^",
+            "~",
+            "\u00a9",
+            "\u00ae",
+            "\u2109",
+            "\u2116",
+            "\u2126",
+            "\u212e",
+            "\u2122",
+            "\u2206",
+            "\u2713",
+            "\u2714",
+            "\u2717",
+            "\u2718",
+            "\u2715",
+            "\u2611",
+            "\u2612",
+            "\u25cf",
+            "\u25aa",
+            "\u25ab",
+            "\u25fc",
+            "\u25b6",
+            "\u25c0",
+            "\u2b06",
+            "\u00a4",
+            "\u00a6",
+            "\u00a7",
+            "\u00a8",
+            "\u00aa",
+            "\u00ab",
+            "\u00ac",
+            "\u00af",
+            "\u00b0",
+            "\u00b2",
+            "\u00b3",
+            "\u00b4",
+            "\u00b5",
+            "\u00b6",
+            "\u00b8",
+            "\u00b9",
+            "\u00ba",
+            "\u00bb",
+            "\u00bc",
+            "\u00bd",
+            "\u00be",
+            "\u00bf",
+            "\u00d7",
+            "\u2010",
+            "\u2011",
+            "\u2012",
+            "\u2014",
+            "\u2015",
+            "\u2016",
+            "\u2017",
+            "\u2018",
+            "\u2019",
+            "\u201a",
+            "\u201b",
+            "\u201c",
+            "\u201d",
+            "\u201e",
+            "\u201f",
+            "\u2020",
+            "\u2021",
+            "\u2023",
+            "\u2024",
+            "\u2026",
+            "\u2027",
+            "\u2030",
+            "\u2034",
+            "\u2035",
+            "\u2036",
+            "\u2037",
+            "\u2038",
+            "\u2039",
+            "\u203a",
+            "\u203b",
+            "\u203c",
+            "\u203d",
+            "\u203e",
+            "\u2212",
+            "\u20a4",
+            "\u20a1",
+            "\u20b9",
+            "\u20bd",
+            "\u20b4",
+            "\u20bf",
+            "\u00a2",
+            "\u20ac",
+            "\u00a3",
+            "\u00a5",
+            "\u2160",
+            "\u2161",
+            "\u2162",
+            "\u2163",
+            "\u2164",
+            "\u2165",
+            "\u2166",
+            "\u2167",
+            "\u2168",
+            "\u2169",
+            "\u216a",
+            "\u216b",
+            "\u2170",
+            "\u2171",
+            "\u2172",
+            "\u2173",
+            "\u2174",
+            "\u2175",
+            "\u2176",
+            "\u2177",
+            "\u2178",
+            "\u2179",
+            "\u217a",
+            "\u217b",
+            "\u2780",
+            "\u2781",
+            "\u2782",
+            "\u2783",
+            "\u2784",
+            "\u2785",
+            "\u2786",
+            "\u2787",
+            "\u2788",
+            "\u2789",
+            "\u278a",
+            "\u278b",
+            "\u278c",
+            "\u278d",
+            "\u278e",
+            "\u278f",
+            "\u2790",
+            "\u2791",
+            "\u2792",
+            "\u2793",
+            "\u2776",
+            "\u2777",
+            "\u2778",
+            "\u2779",
+            "\u277a",
+            "\u277b",
+            "\u277c",
+            "\u277d",
+            "\u277e",
+            "\u277f",
+            "\u2460",
+            "\u2461",
+            "\u2462",
+            "\u2463",
+            "\u2464",
+            "\u2465",
+            "\u2466",
+            "\u2467",
+            "\u2468",
+            "\u2469",
+            "\u2191",
+            "\u2192",
+            "\u2193",
+            "\u2195",
+            "\u2190",
+            "\u2194",
+            "\u21d2",
+            "\u21d0",
+            "\u21d4",
+            "\u2200",
+            "\u2203",
+            "\u2204",
+            "\u2234",
+            "\u2235",
+            "\u221d",
+            "\u221e",
+            "\u2229",
+            "\u222a",
+            "\u2202",
+            "\u222b",
+            "\u222c",
+            "\u222d",
+            "\u222e",
+            "\u222f",
+            "\u2230",
+            "\u2211",
+            "\u220f",
+            "\u221a",
+            "\u221b",
+            "\u221c",
+            "\u2231",
+            "\u2232",
+            "\u2233",
+            "\u2236",
+            "\u2237",
+            "\u223c",
+            "\u2216",
+            "\u2217",
+            "\u2248",
+            "\u2260",
+            "\u2261",
+            "\u2264",
+            "\u2265",
+            "\u2282",
+            "\u2283",
+            "\u22a5",
+            "\u22be",
+            "\u22bf",
+            "\u25a1",
+            "\u2225",
+            "\u220b",
+            "\u0192",
+            "\u2032",
+            "\u2033",
+            "\u00c0",
+            "\u00c1",
+            "\u00c2",
+            "\u00c3",
+            "\u00c4",
+            "\u00c5",
+            "\u00c6",
+            "\u00c7",
+            "\u00c8",
+            "\u00c9",
+            "\u00ca",
+            "\u00cb",
+            "\u00cc",
+            "\u00cd",
+            "\u00ce",
+            "\u00cf",
+            "\u00d0",
+            "\u00d1",
+            "\u00d2",
+            "\u00d3",
+            "\u00d4",
+            "\u00d5",
+            "\u00d6",
+            "\u00d8",
+            "\u00d9",
+            "\u00da",
+            "\u00db",
+            "\u00dc",
+            "\u00dd",
+            "\u00de",
+            "\u00e0",
+            "\u00e1",
+            "\u00e2",
+            "\u00e3",
+            "\u00e4",
+            "\u00e5",
+            "\u00e6",
+            "\u00e7",
+            "\u00e8",
+            "\u00e9",
+            "\u00ea",
+            "\u00eb",
+            "\u00ec",
+            "\u00ed",
+            "\u00ee",
+            "\u00ef",
+            "\u00f0",
+            "\u00f1",
+            "\u00f2",
+            "\u00f3",
+            "\u00f4",
+            "\u00f5",
+            "\u00f6",
+            "\u00f8",
+            "\u00f9",
+            "\u00fa",
+            "\u00fb",
+            "\u00fc",
+            "\u00fd",
+            "\u00fe",
+            "\u00ff",
+            "\u0391",
+            "\u0392",
+            "\u0393",
+            "\u0394",
+            "\u0395",
+            "\u0396",
+            "\u0397",
+            "\u0398",
+            "\u0399",
+            "\u039a",
+            "\u039b",
+            "\u039c",
+            "\u039d",
+            "\u039e",
+            "\u039f",
+            "\u03a0",
+            "\u03a1",
+            "\u03a3",
+            "\u03a4",
+            "\u03a5",
+            "\u03a6",
+            "\u03a7",
+            "\u03a8",
+            "\u03a9",
+            "\u03b1",
+            "\u03b2",
+            "\u03b3",
+            "\u03b4",
+            "\u03b5",
+            "\u03b6",
+            "\u03b7",
+            "\u03b8",
+            "\u03b9",
+            "\u03ba",
+            "\u03bb",
+            "\u03bc",
+            "\u03bd",
+            "\u03be",
+            "\u03bf",
+            "\u03c0",
+            "\u03c1",
+            "\u03c3",
+            "\u03c2",
+            "\u03c4",
+            "\u03c5",
+            "\u03c6",
+            "\u03c7",
+            "\u03c8",
+            "\u03c9",
+            "\u212b",
+            "\u210f",
+            "\u2300",
+            "\u237a",
+            "\u2375",
+            "\ud835\udc62",
+            "\ud835\udf13",
+            "\u0966",
+            "\u2025",
+            "\ufe3d",
+            "\ufe65",
+            "\u2022",
+            "\u00f7",
+            "\u2215",
+            "\u2219",
+            "\u22c5",
+            "\u00b7",
+            "\u00b1",
+            "\u2213",
+            "\u221f",
+            "\u2220",
+            "\u2221",
+            "\u2222",
+            "\u2127",
+            "\u263a"
+          ]
+        }
+      }
+    }
+  ],
+  "quantization": null,
+  "precision_option": "fp32",
+  "metric_policy_id": "oprb_macro_nfkc_layout_markers_removed_v1",
+  "excluded_layout_tokens": [
+    "##LTLine##",
+    "##LTFigure##"
+  ],
+  "ocr_settings": {
+    "pipeline": {
+      "SubModules": {
+        "TextDetection": {
+          "box_thresh": 0.6,
+          "limit_side_len": 960,
+          "limit_type": "max",
+          "max_side_limit": 4000,
+          "model_dir": "/kaggle/working/paddleocr_models/PP-OCRv5_mobile_det",
+          "model_name": "PP-OCRv5_mobile_det",
+          "module_name": "text_detection",
+          "thresh": 0.3,
+          "unclip_ratio": 1.5
+        },
+        "TextLineOrientation": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-LCNet_x1_0_textline_ori",
+          "module_name": "textline_orientation"
+        },
+        "TextRecognition": {
+          "batch_size": 16,
+          "model_dir": "/kaggle/working/paddleocr_models/en_PP-OCRv5_mobile_rec",
+          "model_name": "en_PP-OCRv5_mobile_rec",
+          "module_name": "text_recognition",
+          "return_word_box": false,
+          "score_thresh": 0.0
+        }
+      },
+      "SubPipelines": {
+        "DocPreprocessor": {
+          "SubModules": {
+            "DocOrientationClassify": {
+              "model_dir": null,
+              "model_name": "PP-LCNet_x1_0_doc_ori",
+              "module_name": "doc_text_orientation"
+            },
+            "DocUnwarping": {
+              "model_dir": null,
+              "model_name": "UVDoc",
+              "module_name": "image_unwarping"
+            }
+          },
+          "pipeline_name": "doc_preprocessor",
+          "use_doc_orientation_classify": false,
+          "use_doc_unwarping": false
+        }
+      },
+      "pipeline_name": "OCR",
+      "text_type": "general",
+      "use_doc_preprocessor": false,
+      "use_textline_orientation": false
+    },
+    "explicit_ocr_options": {
+      "use_doc_orientation_classify": false,
+      "use_doc_unwarping": false,
+      "use_textline_orientation": false,
+      "text_det_limit_side_len": 960,
+      "text_det_limit_type": "max",
+      "text_det_thresh": 0.3,
+      "text_det_box_thresh": 0.6,
+      "text_det_unclip_ratio": 1.5,
+      "text_recognition_batch_size": 16,
+      "text_rec_score_thresh": 0.0,
+      "return_word_box": false
+    },
+    "runtime": {
+      "device": "gpu:0",
+      "enable_hpi": false,
+      "use_tensorrt": false,
+      "precision": "fp32",
+      "enable_mkldnn": false,
+      "enable_cinn": false,
+      "cpu_threads": 2
+    }
+  },
+  "reading_order": "PaddleOCR rec_texts order; join nonempty region texts with spaces",
+  "normalize_case": true,
+  "metric_definition": "Macro per-image metrics after layout-token removal; raw_* retains legacy unfiltered scores",
+  "device": "gpu:0",
+  "device_name": "Tesla T4",
+  "cpu_threads": 2,
+  "paddleocr_version": "3.4.1",
+  "paddlex_version": "3.4.0",
+  "paddle_version": "3.2.0",
+  "numpy_version": "2.1.3",
+  "opencv_version": "4.10.0",
+  "jiwer_version": "4.0.0",
+  "categories": [
+    "text",
+    "nontext"
+  ],
+  "no_finetuning": true,
+  "max_samples_per_category": null,
+  "random_seed": 42,
+  "max_eval_hours_per_run": 10.0,
+  "metrics": {
+    "mean_cer": 0.3397005967447206,
+    "mean_wer": 0.432451627010101,
+    "mean_token_precision": 0.8517287671629958,
+    "mean_token_recall": 0.7297374241572548,
+    "mean_token_f1": 0.7774727867073523,
+    "mean_latency_sec": 0.403344417545728,
+    "n_selected": 9000,
+    "n_success": 8999,
+    "n_errors": 1,
+    "n_remaining": 1,
+    "evaluation_complete": false,
+    "n_empty_predictions": 5,
+    "mean_text_regions": 64.23035892876986,
+    "n_gt_markers_removed": 1269185,
+    "n_pred_markers_removed": 0
+  },
+  "raw_metrics": {
+    "mean_cer": 0.33468027971325354,
+    "mean_wer": 0.4360221554958434,
+    "mean_token_precision": 0.8517287671629958,
+    "mean_token_recall": 0.6829472810226617,
+    "mean_token_f1": 0.7441774493802108,
+    "mean_latency_sec": 0.403344417545728
+  },
+  "ground_truth_storage": "Original GT tokens retained in ground_truth; layout tokens removed only while scoring",
+  "gpu_name": "Tesla T4",
+  "cuda_version": "12.6",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "runtime_python": "/tmp/oprb_paddle_py313_cu126_v2/bin/python",
+  "torch_available_in_runtime": false,
+  "runtime_packages_file": "runtime_packages.json",
+  "pandas_version": "2.3.3",
+  "output_token_limit": null,
+  "output_token_limit_note": "No page-wide VLM token generation limit; crop resolution and CTC decoding remain limitations."
+}

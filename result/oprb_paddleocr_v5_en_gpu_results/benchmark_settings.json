@@ -1,0 +1,19 @@
+{
+  "repo_id": "kpurkayastha/OPRB",
+  "data_root": "/kaggle/working/oprb_test",
+  "model_dir": "/kaggle/working/paddleocr_models",
+  "output_dir": "/kaggle/working/oprb_paddleocr_v5_en_gpu_results",
+  "device_preference": "gpu",
+  "categories": [
+    "text",
+    "nontext"
+  ],
+  "max_samples_per_category": null,
+  "random_seed": 42,
+  "normalize_case": true,
+  "max_eval_hours": 10.0,
+  "cpu_threads": 2,
+  "download_data": true,
+  "resume_from": null,
+  "sdk_cache_dir": "/tmp/oprb_paddle_cache"
+}
