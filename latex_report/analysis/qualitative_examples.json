@@ -9,7 +9,9 @@
     "prediction": "Table 4: Simulation Results for Parameters in FitzHugh-Nagamu Model using Nonlinear Least- squares (NLS) with various starting values a=0.34 b=0.20 a =0.58 b=0.58 Starting Values Mean Mean percent Mean Mean percent a b (s.e.) (s.e.) conv. (s.e.) (s.e.) conv. 0.40 0.40 0.340 0.200 93.9% 1.154 2.018 31.7% (0.002) (0.015) (0.011) (0.032) 0.80 0.340 0.200 94.4% 0.580 0.581 94.7% (0.002) (0.015) (0.007) (0.010) 0.80 0.40 1.720 2.771 32.6 % 1.155 2.018 28.5% (0.012) (0.043) (0.010) (0.031) 0.80 1.720 2.770 33.7% 1.154 2.017 32.1% (0.013) (0.043) (0.011) (0.031) 1.2 0.40 1.720 2.770 36.2% 1.155 2.018 31.1% (0.012) (0.044) (0.011) (0.031) 0.80 1.720 2.772 36.2% 1.155 2.016 30.2% (0.013) (0.043) (0.011) (0.030) From BCLS 0.340 0.200 94.2% 0.580 0.581 95.1% (0.002) (0.015) (0.007) (0.010) 37",
     "cer": 0.0,
     "wer": 0.0,
-    "f1": 1.0
+    "f1": 1.0,
+    "possibly_truncated": false,
+    "generated_tokens": null
   },
   {
     "example": "E2",
@@ -21,18 +23,22 @@
     "prediction": "[42] Cordourier-Maruri, G., Gupta, V., and de Coss, R.: Recurrence in resonant trans-\n\nmission of the one-dimensional array of delta potetials, Mod, Phys. Lett. B, 28,\n\n1450016 (2014) os\n\n",
     "cer": 0.0163043478260869,
     "wer": 0.0689655172413793,
-    "f1": 0.9310344827586208
+    "f1": 0.9310344827586208,
+    "possibly_truncated": false,
+    "generated_tokens": null
   },
   {
     "example": "E3",
-    "model": "M4",
-    "category": "nontext",
-    "sample_id": "White_Burnt__2p0pct__102.tar_1606.00144.gz_math_model_arxiv_28_ori",
-    "source": "result/oprb_paddleocr_v5_en_gpu_results/per_image_results.csv",
-    "ground_truth": "29 ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure## ##LTFigure##",
-    "prediction": "Them, cinhaton of E% 5. uing the di a saatix sotation f Bip 14 alws cthat the Roci, T he wlictin of cwo (14 oven the ub ziats ahre deliang the defication -P -C( . (4- -A^ C CP 1 thembans $$- = D the alonpe aof Jal is wigwcal - y all she piew togeshar we laare Eig. 14 decand producta/quotientx, Dh Them, derlntions of Eq. 4, - matricen, wlheto the first ce is dinpo By. I slows that the Jacoban w., and the wcnd depend on lelp m bewen the intermediate livene 7 in relfructiew, Lin it rodacew the sleg RTUF3-L LURAD-SUTR YERO NC0 . 3O EE suiakir dutbaet iheoe sds Ma 2124 Chw T0s 2. 9. 1anc4. 5. Foepy Fabce Crip(a) Dy)  0. a R. a CAT()= CA()-C wh . C HOLD ON! CA-CA #. Iestaimio 1. 94207 N THERE IS MATLAB CODE TO DUWNLOAD whas $A^=}$ 5 hul  B 4LL, 8 8. V. Ce. Jq. 23 MATLAB shb shao-bvidest wlie wi aatie sn - 10 1CP 121 5- metLayrteie Brd, a repe suaplat c ws Fl) $5 whase. Frwd 8se (eos and Jatan/91es 2 - D L R o T1 we Jacul Hedien 0 2  lowp/ighp n -e   1 2 4 lomlt secaptione fale D J -k w2 La sal4 a 4. Mh, 14. M MV 14 29",
-    "cer": 510.0,
-    "wer": 221.0,
-    "f1": 0.0089686098654708
+    "model": "M1",
+    "category": "text",
+    "sample_id": "White_Burnt__2p0pct__103.tar_1408.3064.gz_WWDR_nil_10_ori",
+    "source": "result/oprb_florence_standard_results/per_image_results.csv",
+    "ground_truth": "EXTENSION OF WIENER-WINTNER DOUBLE RECURRENCE THEOREM TO POLYNOMIALS 11 ∈ is a set of full measure since it is a countable intersection of sets of full measures. Hence, if x V, then ∈ (cid:3) (10) converges independent of t R. Before we present the proof for the case t is rational, we ﬁrst demonstrate a few examples on how to prove the Wiener-Winter convergence for polynomials of degree two and three. We believe these examples help the readers understand the proof for the general case. ∈ The key ingredient of the proof for the case t Q is the use of skew-product transformation on T2. First, we prove this for the case p(n) = n2. We ﬁrst ﬁnd an appropriate Anzai skew product [1] on T2, × and we apply this on the product of two functions on X T2, and take the averages. We know that this average converges a.e. by Bourgain’s double recurrence theorem [4], and the right hand side, after appropriate choice of constants and cancellations, will be the Wiener-Wintner averages for the case of polynomial p(n) = n2. We apply Fubini’s theorem and lemma 3.2 to conclude the proof for p(n) = n2. ∈ ∈ We ﬁx t Q (in fact, this argument works for any t R). Consider the following skew-product transformation on T2: (19) R (y, z) = (y + 2α, z + y + α), α (cid:55)→ (cid:55)→ where we will determine α in terms of t. Since the transformations y y + α and z z + y are both measure preserving with respect to the Lebesgue measure m on T, R is a measure-preserving skew- α ⊗ product transformation on T2 with respect to the product measure m m. We note that Rn(y, z) = (y + 2nα, z + ny + n2α). α × Consider functions Fj on X T2 to itself for j = 1, 2 such that Fj(x, y, z) = fj(x)e2πipjye2πiqjz, × where pj and qj are constants to be determined. Let U = T Rα. Then we compute 1 ∑N N F1(Uan(x, y, z))F2(Ubn(x, y, z)) n=1 = N1 ∑N f1(Tanx) f2(Tbnx)e2πip1(y+2anα)e2πip2(y+2bnα)e2πiq1(z+any+a2n2α)e2πiq1(z+bny+b2n2α) n=1 (20) = e2πi(p1+p2)Nye2πi(q1+q2)z ∑N f1(Tanx) f2(Tbnx)e4πi(ap1+bp2)nαe4πi(aq1+bq2)nye2πi(a2q1+b2q2)n2α. n=1 ##LTLine## ##LTLine## ##LTLine##",
+    "prediction": "EXTENSION OF WIENER-WINNER DOUBLE RECURRENCE THEOREM TO POXNOMALS11is a set of full measure since it is a countable intersection of sets of full measures. Hence.(10) converges independent of C.R.Before we present the proof for the case is rational, first demonstrate a few examples on how toprove the Wiener-Winter convergence for the polynomials, degree two and three. We believe these exampleshelp the readers understand the proof of the case for the general case.The key ingredient of the proof is E 1 Q is the use of skew-product product on T2.First, we prove this for the product(We first find X2, and take the averages. We know thatand we apply on the case(ions find X 2, and the right hand side, afterthis average converges of a. by Bourge.le recurrence theorem [1), and the hand right hand afterappropriate choice of constants, cancellations, and lennon 3.2 to conclude the proofs for (P1) = n2.We fix it (in) in fact, this argument works for any E R). Consider the following slow-producttransformation on T1.(19)R.(2) = (y2+2+y+y +y)where we will determine a in terms of T.The transformations y y y + y + a and z = z = y y areboth measure preserving with respect to the Lmeasure m on T, R, is a measure-preserving skew-product transformation on T7 with t2 to measure measure m m. We note thatR.I. (y+2, + y+y)Consider functions F on X X X T to itself for (y + 2,2,+ y) = 1.2, such thatwhere p/ and d) are constants to be determined. Let U = T X R. Then computeN1N2N2(F) =(x2)(x2)(x3)(x3)2)2(x4)(x4)=x2)=x3)=x4=x2=x3=x4 =x2 =x3 =x4. (x4) =x5=x6)=x6=x7=x8=x9=x12=x1=x10=x11=x20=x21=x22=x23=x24=x18=x32=x33=x34=x35=x36=x37=x38=x39=x40=x41=x42=x43=x44=x45=x46=x47=x48=x51=x52=x53=x54=x56=x64=x57=x58=x63=x66=x67=x68=x69=x61=x62=x72=x73=x74=x76=x77=x78=x86=x87=x84=x89=x96=x79=x98=x91=x92=x93=x94=x95=x97=x99=x101=x102=x103=x104=x105=x106=x107=x110=x112=x113=x114=x115=x130=x118=x120=x129=x150=x160=x135=x140=x180=x170=x260=x220=x230=x240=x250=x270=x360=x350=x380=x450=x400=x480=x470=x500=x600=x460=x280=x300=x320=x330=x390=x420=x340=x370=x264=x265=x269=x210=x290=x310=x315=x355=x305=x345=x365=x456=x297=x268=x255=x295=x267=x262=x286=x128=x229=x241=x219=x216=x226=x26=x218=x214=x217=x28=x225=x235=x228=x289=x249=x299=x259=x318=x239=x321=x212=x215=x213=x204=x263=x261=x294=x292=x296=x123=x303=x319=x126=x277=x298=x293=x291=x284=x281=x426=x288=x302=x132=x133=x134=x125=x124=x",
+    "cer": 0.6808721506442021,
+    "wer": 0.5576923076923077,
+    "f1": 0.6359300476947537,
+    "possibly_truncated": true,
+    "generated_tokens": 1024
   }
 ]

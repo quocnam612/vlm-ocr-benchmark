@@ -5,7 +5,6 @@ Dependencies: pandas, rapidfuzz. Original result/ files are never modified.
 """
 from collections import Counter
 import csv
-from difflib import SequenceMatcher
 import hashlib
 import json
 import math
@@ -116,7 +115,7 @@ canonical.reset_index().groupby(['category', 'density']).size().rename('n').rese
 canonical.loc[~canonical.valid_reference, ['ground_truth']].reset_index().to_csv(OUT / 'excluded_references.csv', index=False)
 
 coverage, details, checked_rows = [], [], 0
-scored, cohorts = {}, {}
+scored = {}
 for model, (name, directory) in MODELS.items():
     frame, config = frames[model], configs[model]
     folder = ROOT / 'result' / directory
@@ -178,49 +177,23 @@ for model, (name, directory) in MODELS.items():
 
 pd.DataFrame(coverage).to_csv(OUT / 'coverage.csv', index=False)
 pd.DataFrame(failures).to_csv(OUT / 'execution_errors.csv', index=False)
-all_available = pd.concat([frame.reset_index() for frame in scored.values()], ignore_index=True)
-summarize(all_available, ['model', 'name']).to_csv(OUT / 'summary_all_available.csv', index=False)
 common_all = set.intersection(*(set(frame.index) for frame in scored.values()))
-common_ocr = set.intersection(*(set(scored[model].index) for model in ['M2', 'M3', 'M4', 'M5']))
-assert len(common_all) == 5790 and {key[0] for key in common_all} == {'text'}
-assert common_ocr == valid_keys and len(common_ocr) == 8999
-for cohort_name, keys, models in [('common_text', common_all, list(MODELS)), ('common_ocr', common_ocr, ['M2', 'M3', 'M4', 'M5'])]:
-    rows = pd.concat([scored[model].loc[sorted(keys)].reset_index() for model in models], ignore_index=True)
-    summarize(rows, ['model', 'name']).to_csv(OUT / ('summary_' + cohort_name + '.csv'), index=False)
-    for group in ['category', 'occlusion_type', 'density']:
-        summarize(rows, ['model', 'name', group]).to_csv(OUT / (cohort_name + '_by_' + group + '.csv'), index=False)
-    summarize(rows, ['model', 'name', 'category', 'occlusion_type']).to_csv(OUT / (cohort_name + '_by_category_type.csv'), index=False)
-    pd.DataFrame(sorted(keys), columns=['category', 'sample_id']).to_csv(OUT / (cohort_name + '_ids.csv'), index=False)
+assert common_all == valid_keys and len(common_all) == 8999
+assert all(len(frame) == 9000 for frame in frames.values())
+rows = pd.concat([scored[model].loc[sorted(common_all)].reset_index() for model in MODELS], ignore_index=True)
+summarize(rows, ['model', 'name']).to_csv(OUT / 'summary_common_test.csv', index=False)
+for group in ['category', 'occlusion_type', 'density']:
+    summarize(rows, ['model', 'name', group]).to_csv(OUT / ('common_test_by_' + group + '.csv'), index=False)
+summarize(rows, ['model', 'name', 'category', 'occlusion_type']).to_csv(OUT / 'common_test_by_category_type.csv', index=False)
+pd.DataFrame(sorted(common_all), columns=['category', 'sample_id']).to_csv(OUT / 'common_test_ids.csv', index=False)
 
-# Candidate examples are restricted to common images and retain exact original text.
-examples = []
-for model in MODELS:
-    subset = scored[model].loc[sorted(common_all)]
-    candidates = set(subset.nsmallest(8, 'cer').index) | set(subset.nlargest(8, 'wer').index)
-    candidates |= set(subset.loc[subset.possibly_truncated].nsmallest(3, 'wer').index)
-    candidates |= set(subset.loc[(subset.token_f1 > .75) & (subset.wer > .7)].head(3).index)
-    for key in sorted(candidates):
-        row = frames[model].loc[key]
-        metrics = scored[model].loc[key]
-        ref, hyp = canonical.at[key, 'ref'], normalize(row.prediction, True)
-        matcher = SequenceMatcher(None, ref.split(), hyp.split(), autojunk=False)
-        edits = []
-        for tag, i, j, k, l in matcher.get_opcodes():
-            if tag != 'equal':
-                edits.append({'operation': tag, 'gt': ' '.join(ref.split()[i:j])[:240], 'prediction': ' '.join(hyp.split()[k:l])[:240]})
-        examples.append({'model': model, 'category': key[0], 'sample_id': key[1],
-                         'cer': float(metrics.cer), 'wer': float(metrics.wer), 'f1': float(metrics.token_f1),
-                         'possibly_truncated': bool(metrics.possibly_truncated),
-                         'gt': str(row.ground_truth), 'prediction': str(row.prediction), 'edits': edits[:12]})
-(OUT / 'qualitative_candidates.json').write_text(json.dumps(examples, ensure_ascii=False, indent=2), encoding='utf-8')
-audit = {'date': '2026-11-20', 'source_directory': 'result/', 'csv_reader': 'pandas engine=python, preserve embedded NUL characters', 'metric_policy': 'NFKC, casefold, collapsed whitespace; remove exact layout tokens in GT and prediction',
+audit = {'date': '2026-11-21', 'source_directory': 'result/', 'csv_reader': 'pandas engine=python, preserve embedded NUL characters', 'metric_policy': 'NFKC, casefold, collapsed whitespace; remove exact layout tokens in GT and prediction',
          'excluded_layout_tokens': sorted(LAYOUT_MARKERS), 'metric_aggregation': 'Unweighted arithmetic mean of per-image rates',
          'verified_success_records': checked_rows, 'invalid_reference_count': len(invalid_keys),
-         'common_all_models_count': len(common_all), 'common_ocr_count': len(common_ocr),
+         'common_all_models_count': len(common_all),
          'gt_layout_marker_count': int(canonical.markers_removed.sum()),
          'unspecified_density_count': int(canonical.density.eq('unspecified').sum()),
          'coverage': coverage, 'rate_outliers': details, 'inputs': inputs}
 (OUT / 'audit_summary.json').write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding='utf-8')
-print('\nCOMMON TEXT (all five):\n', pd.read_csv(OUT / 'summary_common_text.csv').to_string(index=False), flush=True)
-print('\nFULL VALID OCR TEST:\n', pd.read_csv(OUT / 'summary_common_ocr.csv').to_string(index=False), flush=True)
+print('\nCOMMON VALID TEST (all five):\n', pd.read_csv(OUT / 'summary_common_test.csv').to_string(index=False), flush=True)
 print('Audit passed. Original result/ files untouched. Derived data:', OUT, flush=True)

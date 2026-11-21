@@ -1,16 +1,15 @@
 % !TeX root = ../main.tex
-\section{Thống kê dữ liệu (Dataset Statistics)}
-OPRB test~\cite{oprb} có 9.000 trang: 6.000 che vùng chữ (text), 3.000 che vùng
-phi văn bản (nontext). Chỉ ảnh trong \texttt{test/\{text,nontext\}/img/} là đầu vào;
-\texttt{gt/} chỉ dùng chấm điểm. Sáu loại che là Black\_Ink, Sim, Through\_Dust,
-Through\_Stamp, White\_Burnt, White\_Whitener: mỗi loại có 1.000 ảnh text;
-nontext lần lượt là 537, 423, 537, 429, 537, 537 ảnh.
-Mật độ 0,5\%/1\%/2\% có 1.961/2.117/2.070 ảnh; 2.852 ảnh Sim/Through\_Stamp
-không mã hóa mật độ trong tên, được giữ ở nhóm chưa xác định.
-
-Bốn OCR đã duyệt đủ 9.000 ảnh. Một GT chỉ có \texttt{\#\#LTFigure\#\#} được loại
-chung, còn 8.999 ảnh hợp lệ (6.000 text, 2.999 nontext).
-Florence dừng do ngân sách 10 giờ/phiên: thành công 5.790 ảnh text, lỗi chuẩn hóa
-số kênh ở 2 ảnh, chưa thử 3.208 ảnh (208 text, 3.000 nontext).
-\textbf{Còn thiếu 3.210/9.000 kết quả Florence thành công}; chưa đủ phạm vi
-toàn test cho cả năm mô hình.
+\section{Thống kê dữ liệu}
+\begin{itemize}
+\item \textbf{Quy mô:} OPRB test~\cite{oprb} có 9.000 ảnh: 6.000 che vùng chữ
+(text), 3.000 che vùng phi văn bản (nontext).
+\item \textbf{Đầu vào và tham chiếu:} chỉ dùng ảnh trong
+\texttt{test/\{text,nontext\}/img/}; GT (văn bản tham chiếu) từ \texttt{gt/}
+chỉ dùng để chấm điểm.
+\item \textbf{Phân bố:} sáu loại che được ghi ở Hình 1. Mỗi loại có 1.000 ảnh
+text; nontext có 537 ảnh/loại, riêng Sim có 423 ảnh và Through\_Stamp có 429 ảnh.
+\end{itemize}
+Cả năm mô hình đã duyệt đủ 9.000 ảnh. Một GT chỉ có \texttt{\#\#LTFigure\#\#}
+được loại chung, còn \textbf{8.999 ảnh có văn bản tham chiếu hợp lệ}
+(6.000 text, 2.999 nontext). Dòng lỗi chấm điểm của PaddleOCR/Tesseract ứng với
+GT này; các ảnh còn lại đều có kết quả.

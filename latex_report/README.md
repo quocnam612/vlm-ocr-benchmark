@@ -1,102 +1,64 @@
-# Báo cáo Lab 2 — OPRB, VLM và OCR
+# Báo cáo Lab 2 — đánh giá VLM và OCR trên OPRB
 
-`main.pdf` là bản báo cáo tiếng Việt, dùng **template HCMUS có sẵn**: giữ
-`hcmus-report-template.sty`, bìa `content/title.tex`, logo, header/footer và BibTeX.
-Báo cáo gồm bìa và hai trang nội dung A4, đủ năm mục theo `../LabOCR.pdf`.
-Giảng viên: PGS.TS. Đinh Điền và TS. Nguyễn Hồng Bửu Long. Ngày bìa dùng
-`\today`, cập nhật khi biên dịch lại (ngày trong PDF không tự đổi nếu không biên dịch).
+`main.pdf` là bản báo cáo tiếng Việt, **3 trang A4 gồm cả bìa**, theo `../LabOCR.pdf`.
+Giữ template HCMUS, logo, header/footer, hai giảng viên và ngày bìa `\today`.
+Có đủ năm mục: Giới thiệu, Thống kê dữ liệu, Mô tả mô hình, Kết quả thực nghiệm,
+Kết luận. Tiêu đề không còn phần chú thích tiếng Anh.
+Tên năm mô hình màu xanh trong bảng ở Mục 3 liên kết đến thư mục kết quả chạy
+trên Google Drive do tác giả cung cấp. Các phần liệt kê dữ liệu, cách chấm,
+nhận xét kết quả và ví dụ được trình bày bằng bullet.
 
-## Kết quả và phạm vi
+## Dữ liệu đã kiểm tra
 
-- M1 Florence-2-base; M2 EasyOCR; M3 docTR MobileNet; M4 PaddleOCR PP-OCRv5
-  mobile English; M5 Tesseract English tessdata_fast. Qwen không nằm trong báo cáo.
-- Kết quả gốc nằm trong `../result/`, không bị sửa bởi quy trình phân tích.
-  Trên Git, CSV được lưu dạng `.csv.gz`; sau khi clone, chạy
-  `python ../scripts/results_archive.py restore` trong thư mục `latex_report/`
-  để khôi phục CSV trước khi chạy phân tích.
-- Florence: 5.792 ảnh đã thử, 5.790 thành công (đều là text), 2 lỗi chuẩn hóa
-  số kênh, 3.208 ảnh chưa thử. Tổng cộng **3.210 ảnh chưa có kết quả thành công**.
-  Log xác nhận notebook dừng chủ động vì `MAX_EVAL_HOURS = 10`, không phải idle.
-- Bốn OCR đã duyệt đủ 9.000 ảnh. GT của một ảnh nontext chỉ có nhãn cấu trúc
-  `##LTFigure##`, không có văn bản tham chiếu. Paddle/Tesseract ghi ảnh này là
-  lỗi chấm điểm; EasyOCR/docTR ghi ok theo quy tắc cũ. Loại cùng ảnh khỏi cả bốn
-  khi phân tích, còn **8.999 ảnh hợp lệ** (6.000 text + 2.999 nontext).
-- Bảng chính so sánh năm mô hình trên **cùng 5.790 ảnh text**, không so sánh
-  trung bình của các tập khác nhau. Bảng tiếp theo đánh giá bốn OCR trên cùng 8.999 ảnh.
-- Báo cáo ghi rõ Florence chưa hoàn tất toàn test, chưa đáp ứng trọn vẹn phạm vi
-  toàn bộ test cho cả năm mô hình. Không coi việc dùng tập chung là đã được
-  giảng viên chấp thuận thay thế yêu cầu đó.
+Năm mô hình đều đã duyệt 9.000 ảnh. Florence/EasyOCR/docTR có 9.000 dòng `ok`;
+PaddleOCR/Tesseract có 8.999 dòng `ok` và cùng một dòng lỗi chấm điểm vì GT chỉ
+có `##LTFigure##`. Loại ảnh đó nhất quán, so sánh cả năm trên **cùng 8.999 ảnh**
+(6.000 text, 2.999 nontext). Không còn dùng tập con Florence 5.790 ảnh.
 
-## Kiểm tra và chấm lại
+`analysis/analyze_results.py` đã tính lại và đối chiếu 44.998 bản ghi thành công
+với điểm gốc, bảng nhóm, cấu hình và GT. Bảng báo cáo dùng NFKC, casefold, gộp
+khoảng trắng, bỏ đúng hai token `##LTLine##`, `##LTFigure##`, tính từng ảnh rồi
+trung bình đều. CER/WER không bị cắt về 100%.
 
-`analysis/analyze_results.py` đã kiểm tra 41.788 bản ghi `status=ok`: tính lại
-CER/WER/P/R/F1 và số từ, đối chiếu điểm từng ảnh, bảng tổng, bảng theo nhóm,
-GT giữa các mô hình, cấu hình, checkpoint, ảnh trùng và thời gian dương.
-`analysis/audit_summary.json` lưu SHA-256 các CSV/cấu hình đầu vào và kết quả kiểm tra.
+Các tệp chính:
 
-Các bảng báo cáo được tính lại nhất quán bằng NFKC, casefold, gộp khoảng trắng,
-loại đúng token `##LTLine##`, `##LTFigure##` ở cả GT và dự đoán. Điểm macro là
-trung bình đều theo ảnh; không cắt CER/WER tại 100%. Bảng gốc Florence/EasyOCR/docTR
-chưa loại marker nên có giá trị khác; không trộn chính sách chấm giữa mô hình.
-
-Đọc CSV bằng **`engine="python"`**, tăng `csv.field_size_limit`: một số GT có ký
-tự NUL và trường rất dài. Engine C mặc định có thể cắt chuỗi tại NUL, làm điểm
-chấm lại sai. Giữ nguyên các ký tự còn lại theo quy tắc notebook.
-
-Không suy mật độ từ trường thứ hai của tên ảnh nếu không khớp đúng
-`0p5pct`, `1p0pct`, `2p0pct`. Với Sim/Through_Stamp, trường đó là ID archive,
-không phải mật độ. Có 2.852 ảnh mật độ chưa xác định, vẫn tính trong bảng tổng
-và theo loại; chỉ bỏ khỏi biểu đồ ba mức mật độ (6.147 ảnh GT hợp lệ).
-
-Các GT rất ngắn còn gây ngoại lệ CER/WER lớn (ví dụ E3 có CER = 510 lần).
-Đây là số thực tế theo công thức, không phải tỷ lệ đã cắt về [0, 1]. Báo cáo
-nêu giới hạn nhãn, không xem mọi ký tự trong hình mà OCR đọc được là lỗi mô hình.
-
-Dữ liệu dẫn xuất:
-
+- `analysis/summary_common_test.csv`: CER/WER/P/R/F1/thời gian của năm mô hình.
+- `analysis/common_test_by_category.csv`, `common_test_by_occlusion_type.csv`:
+  kết quả theo vùng và loại che.
+- `analysis/common_test_ids.csv`: danh sách 8.999 ảnh chung.
 - `analysis/coverage.csv`, `execution_errors.csv`, `excluded_references.csv`:
-  phạm vi, lỗi và GT không hợp lệ.
-- `analysis/scored/M*.csv`: điểm chấm lại từng ảnh, không nhân bản toàn bộ GT/dự đoán.
-- `analysis/summary_common_text.csv`, `summary_common_ocr.csv` và `*_by_*.csv`:
-  các bảng theo tập chung; `*_ids.csv` lưu danh sách ảnh chính xác.
-- `analysis/qualitative_examples.json`: ID đầy đủ, GT/dự đoán và điểm của E1–E3;
-  các đoạn trích trong PDF không thay cho toàn bộ nội dung ảnh.
-- `analysis/build_report_assets.py`: tạo bảng LaTeX và `img/robustness.pdf` (vector),
-  kèm PNG xem trước từ dữ liệu dẫn xuất.
+  số ảnh, lỗi gốc và GT bị loại.
+- `analysis/audit_summary.json`: kết quả kiểm tra và SHA-256 tệp đầu vào.
+- `analysis/qualitative_examples.json`: ID đầy đủ, GT/dự đoán và điểm của ba ví dụ.
+- `analysis/generated/`: hai bảng LaTeX; `img/robustness.pdf`: biểu đồ vector.
 
-Tái tạo (cần Python có pandas, rapidfuzz, matplotlib):
+CSV phải đọc bằng `engine="python"` và tăng `csv.field_size_limit`, để giữ
+các ký tự NUL và GT dài. Mật độ chỉ nhận đúng `0p5pct`, `1p0pct`, `2p0pct`;
+trường thứ hai trong tên Sim/Through_Stamp là ID archive, không phải mật độ.
+Các bảng mật độ gốc được giữ nguyên; phân tích đã sửa cách phân nhóm.
+
+## Tái tạo
+
+Từ thư mục gốc repo, cài `requirements-analysis.txt`. Nếu lấy dữ liệu từ Git,
+chạy `python scripts/results_archive.py restore` trước. Sau đó:
 
 ```sh
-python analysis/analyze_results.py
-python analysis/build_report_assets.py
+python latex_report/analysis/analyze_results.py
+python latex_report/analysis/build_report_assets.py
 ```
 
-Không cần chạy lại suy luận để tái tạo báo cáo. Khi có export Florence đầy đủ,
-cập nhật đúng thư mục `../result/oprb_florence_standard_results/`, rồi cập nhật
-phạm vi/cohort trong script và nội dung nhận xét trước khi biên dịch. Script hiện
-cố ý kiểm tra số lượng 5.790 và 8.999 để tránh dùng nhầm export.
-
-## Chạy tiếp Florence trên Kaggle
-
-Lưu lại output của phiên cũ. Ở phiên mới, khôi phục **cả** `per_image_results.csv`
-và `checkpoint_config.json` vào `OUTPUT_DIR` mà notebook đang dùng
-(`/kaggle/working/oprb_florence_standard_results`). Nếu gắn output phiên trước
-qua Add Input, phải sao chép từ đường dẫn read-only `/kaggle/input/...` sang
-`OUTPUT_DIR` trước cell vòng lặp. Giữ nguyên cấu hình mô hình/giải mã, chọn cả hai
-nhóm và `MAX_SAMPLES_PER_CATEGORY = None`. Kiểm tra log báo tái sử dụng 5.790
-trang thành công rồi chạy tiếp; hai ảnh lỗi sẽ được thử lại. Tăng riêng ngân sách
-thời gian không sửa lỗi chuẩn hóa của hai ảnh đó.
-
-## Biên dịch
-
-Chạy trong `latex_report/`:
+Biên dịch trong `latex_report/`:
 
 ```sh
-TZ=Asia/Ho_Chi_Minh latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+sh build.sh
 pdfinfo main.pdf
 ```
 
-Hoặc dùng pdfLaTeX → BibTeX → pdfLaTeX hai lần. Trên Overleaf chọn `main.tex`
-và pdfLaTeX. Các tệp `analysis/generated/*_table.tex` và `img/robustness.pdf` đã có
-sẵn nên chỉ biên dịch không cần Python hay dữ liệu `result/`.
-`code/`, `member.tex`, `phuluc.tex` thuộc template/bài cũ, không được nhập vào PDF.
+`build.sh` gọi `latexmk`, tự chạy BibTeX và đủ các lượt LaTeX. Nếu chỉ chạy một
+lượt pdfLaTeX khi chưa có tệp phụ, các trích dẫn có thể hiện `[?]`. Tệp chính
+đã đặt công cụ biên dịch là `latexmk`; bản PDF giao kèm đã được kiểm tra không
+còn dấu hỏi ở trích dẫn.
+
+Trên Overleaf chọn `main.tex` và pdfLaTeX. Hai bảng và hình đã có sẵn nên biên
+dịch PDF không cần chạy Python. Thư mục `code/`, `member.tex`, `phuluc.tex` là
+nội dung bài cũ, không được nhập vào báo cáo này.

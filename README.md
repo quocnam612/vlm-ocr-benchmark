@@ -1,98 +1,62 @@
 # VLM / OCR Benchmark trên OPRB
 
-Bài Lab 2: so sánh năm mô hình pretrained nhẹ trên ảnh tài liệu bị che khuất
-của [OPRB](https://huggingface.co/datasets/kpurkayastha/OPRB), chỉ dùng tập test.
-Không huấn luyện hoặc tinh chỉnh trên test; GT chỉ dùng để chấm điểm.
+Đánh giá năm mô hình huấn luyện sẵn trên 9.000 ảnh test của
+[OPRB](https://huggingface.co/datasets/kpurkayastha/OPRB), theo [LabOCR.pdf](LabOCR.pdf).
+GT chỉ dùng để chấm điểm; không huấn luyện hay tinh chỉnh trên test.
 
-**Báo cáo tiếng Việt:** [PDF, 3 trang A4](latex_report/main.pdf) ·
-[Mã LaTeX và hướng dẫn](latex_report/README.md) · [Yêu cầu bài lab](LabOCR.pdf).
+[Báo cáo PDF tiếng Việt — 3 trang A4](latex_report/main.pdf) ·
+[Mã LaTeX và cách tái tạo](latex_report/README.md).
 
-## Mô hình và phạm vi hiện tại
+## Kết quả chạy trên Google Drive
 
-| Mã | Mô hình / pipeline | Notebook | Số ảnh có điểm hợp lệ |
-| --- | --- | --- | ---: |
-| M1 | Florence-2-base, FP16 | [Florence](OPRB_Florence_2_Base_Standard_Decoding.ipynb) | 5.790, đều thuộc text |
-| M2 | EasyOCR: CRAFT + english_g2 | [EasyOCR](OPRB_EasyOCR_English_Test_Evaluation.ipynb) | 8.999 |
-| M3 | docTR: DB / CRNN MobileNetV3 | [docTR](OPRB_docTR_MobileNet_Test_Evaluation.ipynb) | 8.999 |
-| M4 | PP-OCRv5 mobile detector + English recognizer | [PaddleOCR](OPRB_PaddleOCR_PP_OCRv5_Mobile_English_Test_Evaluation.ipynb) | 8.999 |
-| M5 | Tesseract 5, English tessdata_fast | [Tesseract](OPRB_Tesseract_English_Fast_Test_Evaluation.ipynb) | 8.999 |
+- [docTR](https://drive.google.com/drive/folders/1vosBxRMPkBXYH8vZbonjkj5QCFsF_Zy8?usp=sharing)
+- [EasyOCR](https://drive.google.com/drive/folders/1FuShUqY_s74tVkic_I_YohYlBUN1PYTE?usp=sharing)
+- [Florence](https://drive.google.com/drive/folders/1wB9eSuFXprUlT02RjaxQ2TkC1kDmldYf?usp=sharing)
+- [PaddleOCR](https://drive.google.com/drive/folders/1YRyvsGkRrzAg2VqZ2uAJkeus6ThK4WzA?usp=sharing)
+- [Tesseract](https://drive.google.com/drive/folders/1ey57vggKSCMPVbHZfNsQTWAxhwMR9bcX?usp=sharing)
 
-Test có 9.000 ảnh: 6.000 text và 3.000 nontext. Bốn OCR đã duyệt đủ 9.000 ảnh;
-loại chung một GT chỉ chứa marker cấu trúc, còn 8.999 ảnh chấm được.
-Florence chủ động dừng ở ngân sách **10 giờ/phiên**, đã thành công 5.790 ảnh,
-có 2 lỗi và 3.208 ảnh chưa thử: **còn 3.210 ảnh chưa có kết quả thành công**.
-Repo và báo cáo hiện chưa hoàn tất toàn bộ test cho cả năm mô hình.
+## Mô hình
 
-Qwen đã được loại khỏi benchmark hiện tại. Các lần thử nhỏ và nội dung không
-liên quan của bài LaTeX cũ được giữ ở máy cá nhân, không đưa vào repo.
+| Mô hình | Notebook |
+| --- | --- |
+| Florence-2-base | [Florence](OPRB_Florence_2_Base_Standard_Decoding.ipynb) |
+| CRAFT + english_g2 | [EasyOCR](OPRB_EasyOCR_English_Test_Evaluation.ipynb) |
+| DB / CRNN MobileNetV3 | [docTR](OPRB_docTR_MobileNet_Test_Evaluation.ipynb) |
+| PP-OCRv5 mobile, nhận dạng tiếng Anh | [PaddleOCR](OPRB_PaddleOCR_PP_OCRv5_Mobile_English_Test_Evaluation.ipynb) |
+| English tessdata_fast | [Tesseract](OPRB_Tesseract_English_Fast_Test_Evaluation.ipynb) |
 
-## Kết quả so sánh trên cùng 5.790 ảnh text
+Năm mô hình đã duyệt đủ 9.000 ảnh. Loại chung một GT chỉ chứa nhãn cấu trúc,
+các bảng báo cáo dùng **cùng 8.999 ảnh** (6.000 text, 2.999 nontext).
+Florence hiện đã hoàn tất, không còn là kết quả một phần. Qwen không nằm trong
+benchmark này.
 
-Các chỉ số là trung bình macro theo ảnh, dùng %, thời gian dùng giây/ảnh.
-M1–M4 chạy trên một Tesla T4; M5 chạy CPU Xeon, nên thời gian CPU/GPU không phải
-phép so sánh trên cùng phần cứng.
+## Kết quả trên 8.999 ảnh chung
 
-| Mô hình | CER ↓ | WER ↓ | Precision ↑ | Recall ↑ | F1 ↑ | Giây/ảnh ↓ |
+Trung bình đều theo ảnh; các tỷ lệ dùng %, thời gian dùng giây/ảnh.
+Florence/EasyOCR/docTR/PaddleOCR dùng một Tesla T4; Tesseract dùng CPU Xeon.
+
+| Mô hình | CER ↓ | WER ↓ | P ↑ | R ↑ | F1 ↑ | Giây/ảnh ↓ |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Florence | 56,04 | 77,55 | 53,67 | 31,63 | 38,70 | 5,698 |
-| EasyOCR | 55,39 | 81,05 | 44,56 | 31,96 | 36,76 | 1,351 |
-| docTR | 43,85 | 59,76 | 78,38 | 66,18 | 71,14 | 0,595 |
-| PaddleOCR | **24,66** | **38,08** | **85,62** | **70,78** | **76,75** | **0,389** |
-| Tesseract | 43,82 | 63,76 | 60,42 | 42,40 | 49,05 | 0,940 |
+| Florence | 61,27 | 79,33 | 53,41 | 31,69 | 38,55 | 5,597 |
+| EasyOCR | 57,60 | 82,42 | 43,86 | 31,96 | 36,51 | 1,363 |
+| docTR | 47,86 | 62,89 | 78,79 | 68,86 | 72,76 | 0,601 |
+| PaddleOCR | 33,97 | 43,25 | 85,17 | 72,97 | 77,75 | 0,403 |
+| Tesseract | 47,94 | 66,65 | 59,73 | 41,13 | 47,84 | 0,906 |
 
-Trên 8.999 ảnh GT hợp lệ, PaddleOCR đạt CER 33,97%, WER 43,25%, F1 77,75%.
-Xem [bảng theo nhóm](latex_report/analysis/common_ocr_by_category.csv) và
-[biểu đồ độ bền vững](latex_report/img/robustness.pdf).
+Điểm được chấm lại với cùng quy tắc: NFKC, casefold, gộp khoảng trắng, bỏ hai
+token cấu trúc `##LTLine##`, `##LTFigure##`. CER/WER có thể vượt 100%.
+Xem [phân tích theo nhóm](latex_report/analysis/common_test_by_category.csv) và
+[biểu đồ theo loại che](latex_report/img/robustness.pdf).
 
-Quy tắc chung: NFKC, casefold, gộp khoảng trắng và loại đúng hai token
-`##LTLine##`, `##LTFigure##` ở GT lẫn dự đoán. Vì các export cũ chưa cùng quy tắc
-marker, báo cáo dùng điểm chấm lại trong `latex_report/analysis/`, không trộn
-trực tiếp các bảng gốc. CER/WER có thể vượt 100%; không cắt giá trị ngoại lệ.
+## Tệp kết quả và tái tạo
 
-## Nội dung repo
+- `result/`: CSV gốc (nén `.csv.gz` trên Git), cấu hình, bảng nhóm và hình export.
+- `latex_report/analysis/`: điểm chấm lại, bảng dùng trong báo cáo, ba ví dụ có ID
+  và GT/dự đoán đầy đủ, cùng hash các đầu vào đã kiểm tra.
+- `paddleocr_isolated_benchmark.py`, `tesseract_isolated_benchmark.py`: worker
+  standalone; notebook đã nhúng worker nên không cần upload riêng.
 
-```text
-OPRB_*.ipynb                 Notebook chạy độc lập cho từng mô hình
-paddleocr_isolated_benchmark.py
-tesseract_isolated_benchmark.py  Bản standalone của worker nhúng trong notebook
-result/                     Export gốc: cấu hình, bảng nhóm, hình và CSV nén
-latex_report/               Template HCMUS, báo cáo PDF/LaTeX, phân tích dẫn xuất
-scripts/results_archive.py  Nén/khôi phục CSV, kiểm tra SHA-256
-requirements-analysis.txt  Phụ thuộc để tái tạo phân tích và biểu đồ
-```
-
-Không đưa ảnh dataset, trọng số mô hình hay tệp build LaTeX tạm vào Git.
-Các file `per_image_results.csv.gz` là **bản nén không mất dữ liệu** của CSV gốc;
-Git không theo dõi bản `.csv` đã giải nén. Các hash đầu vào được lưu trong
-[`audit_summary.json`](latex_report/analysis/audit_summary.json).
-
-## Chạy notebook trên Kaggle
-
-Mỗi notebook chứa bước cài đặt và cấu hình riêng. M1–M4 cần GPU CUDA;
-Tesseract chạy CPU. Notebook tải ảnh test và trọng số pretrained khi chạy.
-PaddleOCR/Tesseract dùng môi trường tách riêng được thiết lập trong notebook;
-không cần upload hai worker `.py` riêng nếu chạy notebook.
-
-Thử cấu hình mẫu nhỏ trước; để đánh giá toàn bộ test, đặt
-`MAX_SAMPLES_PER_CATEGORY = None` và chọn cả `text`, `nontext`.
-Giữ thư mục kết quả riêng cho từng mô hình; xuất và lưu output sau mỗi phiên.
-
-### Chạy tiếp Florence
-
-1. Gắn output Florence của phiên trước vào phiên mới.
-2. Khôi phục **cả** `per_image_results.csv` và `checkpoint_config.json` vào
-   `/kaggle/working/oprb_florence_standard_results/` trước cell vòng lặp.
-3. Giữ nguyên cấu hình mô hình/giải mã, chọn cả hai nhóm, đặt
-   `MAX_SAMPLES_PER_CATEGORY = None` và `MAX_EVAL_HOURS = 10.0`.
-4. Kiểm tra log `Reusing 5,790 successful selected pages; 3,210 remaining.`
-   trước khi để notebook chạy tiếp. Hai ảnh lỗi cũ sẽ được thử lại.
-
-Nếu lấy checkpoint từ repo này, giải nén CSV trước khi upload; file JSON nằm
-cùng thư mục kết quả. Không bỏ kiểm tra cấu hình khi môi trường khác checkpoint.
-
-## Tái tạo phân tích và báo cáo
-
-Cần Python 3.11 trở lên và môi trường ảo riêng:
+Dùng Python 3.11 trở lên với môi trường ảo:
 
 ```sh
 python -m venv .venv
@@ -103,21 +67,21 @@ python latex_report/analysis/analyze_results.py
 python latex_report/analysis/build_report_assets.py
 ```
 
-Quy trình đã đối chiếu 41.788 bản ghi `status=ok` với điểm gốc và các bảng tổng.
-Đọc CSV bằng Python engine để giữ các ký tự NUL trong GT; không dùng C engine
-mặc định để chấm lại. Script hiện kiểm tra chặt các cohort 5.790 / 8.999;
-khi cập nhật kết quả Florence cần cập nhật cohort và các nhận xét tương ứng.
+Các CSV khôi phục được kiểm tra SHA-256. Đọc GT bằng Python CSV engine để giữ
+ký tự NUL; không dùng C engine mặc định để chấm lại. Để cập nhật archive sau khi
+có export mới: `python scripts/results_archive.py pack`.
 
-Biên dịch LaTeX bằng pdfLaTeX/BibTeX (cần TeX Live có hỗ trợ tiếng Việt):
+## Notebook và chạy tiếp
 
-```sh
-cd latex_report
-TZ=Asia/Ho_Chi_Minh latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-```
+Mỗi notebook có bước cài đặt và cấu hình riêng. M1–M4 cần GPU CUDA; Tesseract
+chạy CPU. Chọn cả hai nhóm và `MAX_SAMPLES_PER_CATEGORY = None` để chạy toàn test.
+Ảnh dataset và trọng số được tải khi chạy, không đưa vào Git.
 
-Đã có sẵn bảng LaTeX và hình vector để biên dịch PDF mà không chạy lại phân tích.
-Giữ template HCMUS, logo, bìa và hai giảng viên; ngày bìa dùng `\today`, cập nhật
-khi biên dịch. Báo cáo giới hạn 3 trang A4 kể cả bìa.
+[Notebook Resume](OPRB_Florence_2_Base_Resume.ipynb) tự khôi phục CSV/CSV.gz và
+`checkpoint_config.json` từ output Florence đã gắn qua Add Input. Nó giữ tiến độ
+trong thư mục làm việc và chỉ thử ảnh lỗi/chưa thành công. Bản này đã sửa lỗi
+ảnh 1×1 và lỗi trộn chuỗi/số khi tổng hợp sau resume.
 
-Sau khi có export mới, kiểm tra/chấm lại rồi chạy
-`python scripts/results_archive.py pack` để cập nhật các archive trước khi commit.
+Nếu đã có đủ kết quả hiện tại, không cần suy luận lại để tái tạo báo cáo.
+Notebook Qwen, thư mục thử nghiệm `test/`, tệp build LaTeX tạm và nội dung không
+liên quan của template cũ được giữ ở máy cá nhân, không đưa lên Git.

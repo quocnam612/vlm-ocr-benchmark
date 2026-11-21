@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-20",
+  "date": "2026-11-21",
   "source_directory": "result/",
   "csv_reader": "pandas engine=python, preserve embedded NUL characters",
   "metric_policy": "NFKC, casefold, collapsed whitespace; remove exact layout tokens in GT and prediction",
@@ -8,10 +8,9 @@
     "##ltline##"
   ],
   "metric_aggregation": "Unweighted arithmetic mean of per-image rates",
-  "verified_success_records": 41788,
+  "verified_success_records": 44998,
   "invalid_reference_count": 1,
-  "common_all_models_count": 5790,
-  "common_ocr_count": 8999,
+  "common_all_models_count": 8999,
   "gt_layout_marker_count": 1269186,
   "unspecified_density_count": 2852,
   "coverage": [
@@ -19,15 +18,15 @@
       "model": "M1",
       "name": "Florence",
       "selected": 9000,
-      "attempted": 5792,
-      "status_ok": 5790,
-      "scorable": 5790,
-      "errors": 2,
-      "unattempted": 3208,
+      "attempted": 9000,
+      "status_ok": 9000,
+      "scorable": 8999,
+      "errors": 0,
+      "unattempted": 0,
       "empty_predictions": 0,
-      "truncated": 1038,
-      "text_scorable": 5790,
-      "nontext_scorable": 0
+      "truncated": 1586,
+      "text_scorable": 6000,
+      "nontext_scorable": 2999
     },
     {
       "model": "M2",
@@ -89,10 +88,10 @@
   "rate_outliers": [
     {
       "model": "M1",
-      "max_cer": 2.3,
-      "n_cer_gt_one": 51,
-      "max_wer": 3.9133858267716537,
-      "n_wer_gt_one": 122
+      "max_cer": 93.5,
+      "n_cer_gt_one": 185,
+      "max_wer": 27.5,
+      "n_wer_gt_one": 235
     },
     {
       "model": "M2",
@@ -126,11 +125,11 @@
   "inputs": [
     {
       "path": "result/oprb_florence_standard_results/per_image_results.csv",
-      "sha256": "8c87fadc34a9fb37ca92eca5e92133cecc495f41c76fb8ad5878aa536f14a5ac"
+      "sha256": "168fab29fefcd694a205aadf4a363e3f4e4e5c211a503745c509277456df97ff"
     },
     {
       "path": "result/oprb_florence_standard_results/run_config.json",
-      "sha256": "15e723fc2f40c0b06268ddc4344c650904c964f78873840230b60e5e046fd49a"
+      "sha256": "97613666262c6c376209b546e7d65143efdde3504f03b21fa1531a12f9345141"
     },
     {
       "path": "result/oprb_florence_standard_results/checkpoint_config.json",

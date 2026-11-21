@@ -1,24 +1,22 @@
 % !TeX root = ../main.tex
-\section{Mô tả mô hình (Model Descriptions)}
-Chọn một VLM nhỏ và bốn OCR chuyên dụng để khảo sát khả năng sinh văn bản so với
-pipeline phát hiện--nhận dạng. M1--M4 chạy trên một Tesla T4 của Kaggle;
-M5 chạy CPU Xeon 2,00 GHz (giới hạn OpenMP 2 luồng).
+\section{Mô tả mô hình}
+Tất cả dùng trọng số huấn luyện sẵn, không huấn luyện hay tinh chỉnh trên tập test.
 
-\begingroup\fontsize{9.2}{10.3}\selectfont
-\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
-\begin{tabularx}{\linewidth}{@{}l>{\hsize=0.95\hsize\linewidth=\hsize}Yl>{\hsize=1.05\hsize\linewidth=\hsize}Y@{}}
+\begingroup\fontsize{9.5}{11}\selectfont
+\hypersetup{colorlinks=true,urlcolor=blue,citecolor=black}
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}p{3.0cm}Yp{3.0cm}p{1.55cm}@{}}
 \toprule
-\textbf{Mã} & \textbf{Mô hình pretrained} & \textbf{Quy mô$^*$} & \textbf{Cấu hình chạy} \\
+\textbf{Mô hình} & \textbf{Thành phần và cấu hình chính} & \textbf{Quy mô} & \textbf{Thiết bị} \\
 \midrule
-M1 & Florence-2-base~\cite{florence} & $\sim$230M tham số & FP16; $768^2$; \texttt{<OCR>}; 1.024 token; 3 beams; no-repeat 3-gram \\
-M2 & EasyOCR 1.7.2: CRAFT + english\_g2~\cite{easyocr} & 24,55M; 93,74 MiB & FP32; canvas 2.560; greedy; batch crop 16 \\
-M3 & docTR 0.11.0: DB/CRNN MobileNetV3~\cite{doctr} & 6,26M; 24,24 MiB & FP32; detector $1024^2$; crop $32\!\times\!128$; batch 128 \\
-M4 & PaddleOCR 3.4.1: PP-OCRv5 mobile det + en rec~\cite{paddle} & 11,89 MiB & FP32; cạnh dài tối đa 960; batch 16; tắt xoay, unwarp, TensorRT \\
-M5 & Tesseract 5.5.4: eng tessdata\_fast~\cite{tesseract} & 3,92 MiB & LSTM số nguyên; OEM 1, PSM 3; không resize; tắt học thích nghi \\
+\href{https://drive.google.com/drive/folders/1wB9eSuFXprUlT02RjaxQ2TkC1kDmldYf?usp=sharing}{\textcolor{blue}{Florence-2-base}}~\cite{florence} & Ảnh $768\!\times\!768$; FP16; tối đa 1.024 token; 3 nhánh tìm kiếm & $\sim$230M & GPU T4 \\
+\href{https://drive.google.com/drive/folders/1FuShUqY_s74tVkic_I_YohYlBUN1PYTE?usp=sharing}{\textcolor{blue}{EasyOCR}}~\cite{easyocr} & CRAFT + english\_g2; FP32; cạnh canvas tối đa 2.560 pixel & 24,55M; 93,74 MiB & GPU T4 \\
+\href{https://drive.google.com/drive/folders/1vosBxRMPkBXYH8vZbonjkj5QCFsF_Zy8?usp=sharing}{\textcolor{blue}{docTR}}~\cite{doctr} & DB MobileNetV3 Large + CRNN MobileNetV3 Small; FP32 & 6,26M; 24,24 MiB & GPU T4 \\
+\href{https://drive.google.com/drive/folders/1YRyvsGkRrzAg2VqZ2uAJkeus6ThK4WzA?usp=sharing}{\textcolor{blue}{PaddleOCR}}~\cite{paddle} & PP-OCRv5 mobile: phát hiện + nhận dạng tiếng Anh; FP32; cạnh dài tối đa 960 pixel & 11,89 MiB & GPU T4 \\
+\href{https://drive.google.com/drive/folders/1ey57vggKSCMPVbHZfNsQTWAxhwMR9bcX?usp=sharing}{\textcolor{blue}{Tesseract}}~\cite{tesseract} & tessdata\_fast tiếng Anh; LSTM số nguyên; OEM 1, PSM 3; không đổi kích thước ảnh & 3,92 MiB & CPU Xeon \\
 \bottomrule
 \end{tabularx}
 \endgroup
-{\footnotesize $^*$M1 là số tham số danh định; M2/M3 đếm cả hai mạng (docTR dùng
-DB MobileNetV3 Large, CRNN MobileNetV3 Small). MiB là tổng tệp trọng số đã lưu;
-M5 gồm cả từ điển, không suy ra số tham số từ dung lượng. M4 dùng Paddle 3.2.0,
-PaddleX 3.4.0; checkpoint/revision, hash và phiên bản được lưu trong cấu hình.\par}
+{\footnotesize Nhấn tên mô hình màu xanh để mở thư mục kết quả chạy trên Google Drive.
+M: triệu tham số; MiB: tệp trọng số, gồm cả dữ liệu ngôn ngữ với
+Tesseract. GPU: Tesla T4; CPU: Xeon 2,00 GHz, giới hạn OpenMP 2 luồng.\par}
